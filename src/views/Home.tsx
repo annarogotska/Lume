@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Ic } from "../components/icons";
 import { Media } from "../components/ui";
 import { LogoMark } from "../components/LogoMark";
+import { ServiceIllo } from "../components/ServiceIllo";
 import { useReveal } from "../components/useReveal";
 import { gsap, useGSAP, prefersReducedMotion } from "../anim/gsap";
 import { CASES, CAPS, WHY, STATS, SERVICES, STUDIO } from "../data";
@@ -195,6 +196,7 @@ export function Home({ go }: { go: Go }) {
                 <span className="svc-n">{s.n}</span>
                 <h3>{s.title}</h3>
                 <p className="muted">{s.lead}</p>
+                <ServiceIllo kind={s.key} />
                 <span className="svc-arrow">{Ic.arrowUpRight()}</span>
               </button>
             ))}
