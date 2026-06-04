@@ -16,14 +16,13 @@ import { Contact } from "./views/Contact";
 import { STUDIO, CASES } from "./data";
 import { parseHash, type Go, type Route } from "./router";
 
-const TAGLINE = "Design at the speed of thought";
 const META: Record<Route, { title: string; desc: string }> = {
-  home: { title: `Nuvel — ${TAGLINE}`, desc: "A design & build studio. Fast, fearless websites — and the platforms behind them — designed, built and shipped in one to two weeks." },
-  work: { title: "Work — Nuvel", desc: "Selected websites and platforms — brand to checkout, marketplace to launchpad. Most shipped end-to-end in one to two weeks." },
-  case: { title: `Case study — Nuvel`, desc: "A Nuvel case study — the challenge, the approach and the result." },
-  services: { title: "Services — Nuvel", desc: "Websites, platforms & CRM, brand and design systems — designed, built and shipped fast." },
-  process: { title: "Process — Nuvel", desc: "A tight four-step rhythm — Spark, Shape, Build, Launch — from brief to launched in two weeks." },
-  contact: { title: "Start a project — Nuvel", desc: "Tell us what you're building. We reply within one business day." },
+  home: { title: "Nuvel — design & build studio for fast websites & apps", desc: "A design & build studio. Fast, fearless websites — and the platforms behind them — designed, built and shipped in one to two weeks." },
+  work: { title: "Selected work — websites & platforms · Nuvel studio", desc: "Selected websites and platforms — brand to checkout, marketplace to launchpad. Most shipped end-to-end in one to two weeks." },
+  case: { title: "Case study — Nuvel", desc: "A Nuvel case study — the challenge, the approach and the result." },
+  services: { title: "Services — websites, platforms, brand & systems · Nuvel", desc: "Websites, platforms & CRM, brand and design systems — designed, built and shipped fast by one tight, opinionated studio." },
+  process: { title: "Our process — from brief to launched in two weeks · Nuvel", desc: "A tight four-step rhythm — Spark, Shape, Build, Launch — taking your project from brief to launched in about two weeks." },
+  contact: { title: "Start a project — work with the Nuvel design studio", desc: "Tell us what you're building — a website, a platform or a full product. We reply within one business day." },
 };
 
 function setMeta(attr: "name" | "property", key: string, value: string) {

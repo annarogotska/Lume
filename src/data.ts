@@ -111,7 +111,7 @@ export const CASES: CaseStudy[] = [
       "Internationalised EN/DE/ES (~546 strings)",
       "Lighthouse budgets enforced in CI — LCP < 2.5s, CLS < 0.1",
     ],
-    cover: "/assets/cases/Veyrun1.png",
+    cover: "/assets/cases/Veyrun1.webp",
     tldr: "A digital-first running brand taken end-to-end — brand, storefront, checkout and admin — across 26 routes in a single week.",
     services: ["Brand Identity", "E-commerce", "Front-end Build", "i18n"],
     metrics: [
@@ -177,7 +177,7 @@ export const CASES: CaseStudy[] = [
       "3 locales, 900+ localised strings",
       "Mock-first — designed and tested with no backend dependency",
     ],
-    cover: "/assets/cases/Rivel_cover.png",
+    cover: "/assets/cases/Rivel_cover.webp",
     tldr: "A curated digital children's bookstore — 22 screens, a signature page-transition language, and 68 end-to-end tests.",
     services: ["Brand Identity", "E-commerce SPA", "Motion", "QA"],
     metrics: [
@@ -223,7 +223,7 @@ export const CASES: CaseStudy[] = [
       { src: "/assets/cases/Rivel3.mp4" },
       { src: "/assets/cases/Rivel5.mp4" },
       { src: "/assets/cases/Rivel6.mp4" },
-      { src: "/assets/cases/Rivel7.png" },
+      { src: "/assets/cases/Rivel7.webp" },
     ],
   },
   {
@@ -245,7 +245,7 @@ export const CASES: CaseStudy[] = [
       "Zod schemas shared across front-end and back-end",
       "DBS-verification flow + Stripe payouts",
     ],
-    cover: "/assets/cases/Knowlio1.png",
+    cover: "/assets/cases/Knowlio1.webp",
     tldr: "An editorial-feel UK tutor marketplace — full brand, design system, an 8-component animation library and the entire front-end.",
     services: ["Brand", "Design System", "Animation Library", "Next.js Front-end"],
     metrics: [
@@ -290,8 +290,8 @@ export const CASES: CaseStudy[] = [
       { src: "/assets/cases/Knowlio3.mp4" },
       { src: "/assets/cases/Knowlio5.mp4" },
       { src: "/assets/cases/Knowlio6.mp4" },
-      { src: "/assets/cases/Knowlio8.png" },
-      { src: "/assets/cases/Knowlio9.png" },
+      { src: "/assets/cases/Knowlio8.webp" },
+      { src: "/assets/cases/Knowlio9.webp" },
     ],
   },
   {
@@ -313,7 +313,7 @@ export const CASES: CaseStudy[] = [
       "Coming-soon carousel with honest labelling",
       "Token-based design system built for the platform",
     ],
-    cover: "/assets/cases/Genly_cover.png",
+    cover: "/assets/cases/Genly_cover.webp",
     tldr: "An AI platform — chatbot plus audio, image and video studios — unified across one multilingual, multi-currency surface.",
     services: ["Brand", "Marketing Site", "Product UI", "Design Tokens"],
     metrics: [
@@ -329,22 +329,22 @@ export const CASES: CaseStudy[] = [
       {
         label: "The brief",
         body: "One home for the AI tools the client was rolling out — chatbot, audio studio, image studio, video studio — that reads as one product rather than four. The audience: professionals automating their workflow, not “AI enthusiasts.” The bar was a marketing surface that earns trust on first scroll, multilingual, with a token-aware account header showing a real balance, not a fake counter.",
-        media: "/assets/cases/Genly1.png",
+        media: "/assets/cases/Genly1.webp",
       },
       {
         label: "The entry surface",
         body: "The chatbot is the first tool a new user touches, so a glass-card mock of the chat input lives on the landing page — the user sees the product working before they ever sign in.",
-        media: "/assets/cases/Genly2.png",
+        media: "/assets/cases/Genly2.webp",
       },
       {
         label: "Studios — audio, image, video",
         body: "An accordion opens the three creation tools side-by-side with a single hero render. Pick one and you land in a tool that wears the same shell as the marketing site — so the product never feels like four things bolted together.",
-        media: "/assets/cases/Genly3.png",
+        media: "/assets/cases/Genly3.webp",
       },
       {
         label: "One system, handed off clean",
         body: "100% designed in Figma — every screen, every state, on a token-based design system built for the platform. Currency and language live in the nav; the account header carries one token balance, modelled as a single source of truth. Engineering shipped straight from the Figma file, tokens shared in a defined export so spacing and colour never drift.",
-        media: "/assets/cases/Genly4.png",
+        media: "/assets/cases/Genly4.webp",
       },
     ],
     phases: [
@@ -354,10 +354,10 @@ export const CASES: CaseStudy[] = [
       { label: "Hand-off", detail: "Auto-layout components and a defined token export to in-house engineering." },
     ],
     media: [
-      { src: "/assets/cases/Genly1.png" },
-      { src: "/assets/cases/Genly2.png" },
-      { src: "/assets/cases/Genly3.png" },
-      { src: "/assets/cases/Genly4.png" },
+      { src: "/assets/cases/Genly1.webp" },
+      { src: "/assets/cases/Genly2.webp" },
+      { src: "/assets/cases/Genly3.webp" },
+      { src: "/assets/cases/Genly4.webp" },
     ],
   },
   {
@@ -379,7 +379,7 @@ export const CASES: CaseStudy[] = [
       "KYB-aware merchant onboarding",
       "Merchant-facing analytics & reports",
     ],
-    cover: "/assets/cases/Payment1.png",
+    cover: "/assets/cases/Payment1.webp",
     tldr: "A crypto payment-gateway interface — accepting, converting and settling digital currency without the usual fintech anxiety.",
     services: ["Product Design", "Fintech UI", "Design System"],
     metrics: [
@@ -395,22 +395,22 @@ export const CASES: CaseStudy[] = [
       {
         label: "The brief",
         body: "A licensed European platform bridging banking and crypto: a business IBAN for fiat — SEPA, SWIFT, mass payments — alongside a gateway to accept crypto online, in-store and via terminal. The bar was the trust quality of a regulated bank, for a product moving real money across 50+ countries. Every screen serves two readers at once — the merchant moving fast through a daily flow, and the compliance reviewer who has to audit it later.",
-        media: "/assets/cases/Payment2.png",
+        media: "/assets/cases/Payment2.webp",
       },
       {
         label: "A token system, built to scale",
         body: "Designed entirely in Figma on a token-based system — colour, type, spacing, radii, elevation, motion. One component library across the IBAN wallet, the crypto-acceptance gateway, checkout and onboarding. From the same base I produced 6+ white-label versions for partners — a new partner brand is a token swap, not a redesign, which is what made shipping that many viable.",
-        media: "/assets/cases/Payment4.png",
+        media: "/assets/cases/Payment4.webp",
       },
       {
         label: "Merchant dashboard",
         body: "Balances across fiat and crypto, transactions, payouts, mass payments, team access — a lot of data fighting for one screen. I led with the two questions a business asks daily — how much do I hold, and what’s moving — and pushed the rest behind progressive disclosure, so the dashboard reads as a control surface, not a spreadsheet.",
-        media: "/assets/cases/Payment3.png",
+        media: "/assets/cases/Payment3.webp",
       },
       {
         label: "Mobile wallet & KYB onboarding",
         body: "A wallet designed for a thumb: large numeric input, one purpose per screen, every failure mode named and given a next move. Business onboarding and KYB split into discrete, save-able stages so a compliance team can review without losing context — each stage states what it needs up front, so nothing surprises the merchant mid-flow.",
-        media: "/assets/cases/Payment5.png",
+        media: "/assets/cases/Payment5.webp",
       },
     ],
     phases: [
@@ -420,11 +420,11 @@ export const CASES: CaseStudy[] = [
       { label: "Phase 4 · Onboarding & scale", detail: "KYB onboarding plus 6+ white-label versions from one token base." },
     ],
     media: [
-      { src: "/assets/cases/Payment2.png" },
-      { src: "/assets/cases/Payment4.png" },
-      { src: "/assets/cases/Payment3.png" },
-      { src: "/assets/cases/Payment5.png" },
-      { src: "/assets/cases/Payment6.png" },
+      { src: "/assets/cases/Payment2.webp" },
+      { src: "/assets/cases/Payment4.webp" },
+      { src: "/assets/cases/Payment3.webp" },
+      { src: "/assets/cases/Payment5.webp" },
+      { src: "/assets/cases/Payment6.webp" },
     ],
   },
   {
@@ -446,7 +446,7 @@ export const CASES: CaseStudy[] = [
       "Trading mechanics: AMM, swaps, pools",
       "One design system spanning every service",
     ],
-    cover: "/assets/cases/PlanetDex1.png",
+    cover: "/assets/cases/PlanetDex1.webp",
     tldr: "DEX trading and swap, an NFT marketplace, and a launchpad with vesting — three products, one tokenised system.",
     services: ["Product Design", "Design System", "Web3 UI"],
     metrics: [
@@ -462,22 +462,22 @@ export const CASES: CaseStudy[] = [
       {
         label: "The brief",
         body: "A Saudi DeFi startup’s flagship — five services on one chain: DEX, NFT marketplace, launchpad, liquidity pools and yield farming. The bar: the trade quality of an established DEX without the Web3-bro aesthetic — calm, legible, trustworthy enough to move real money through. Five services under one brand is a coherence problem before it’s a screen problem: each tool needs its own register while still feeling like one product.",
-        media: "/assets/cases/PlanetDex2.png",
+        media: "/assets/cases/PlanetDex2.webp",
       },
       {
         label: "The swap surface",
         body: "An AMM swap with price impact, slippage and route preview surfaced before the user commits. The flow is wallet-first — nothing is interactive until you’re connected, so there are no fictional “what if” states. Verified-token filtering is on by default, keeping scam tokens out of the happy path without the user having to think about it.",
-        media: "/assets/cases/PlanetDex3.png",
+        media: "/assets/cases/PlanetDex3.webp",
       },
       {
         label: "NFT marketplace",
         body: "Browse, list, buy, place offers. The listing flow names the gas cost up front and asks for approval in a single sentence — no surprise wallet pop-ups mid-flow. A first-time buyer can finish a purchase without leaving for docs.",
-        media: "/assets/cases/PlanetDex4.png",
+        media: "/assets/cases/PlanetDex4.webp",
       },
       {
         label: "Launchpad — IDO & vesting",
         body: "IDO presales with vesting shown as a real schedule, not a paragraph of legalese. Allocation, claim status and KYC-gating split into clear steps. The launchpad needed its own component vocabulary — once it had one, the whole flow got clearer.",
-        media: "/assets/cases/PlanetDex5.png",
+        media: "/assets/cases/PlanetDex5.webp",
       },
     ],
     phases: [
@@ -487,11 +487,11 @@ export const CASES: CaseStudy[] = [
       { label: "Phase 4 · Launchpad & polish", detail: "IDO and vesting, KYC-gating, and a wallet drawer covering every failure mode." },
     ],
     media: [
-      { src: "/assets/cases/PlanetDex2.png" },
-      { src: "/assets/cases/PlanetDex3.png" },
-      { src: "/assets/cases/PlanetDex4.png" },
-      { src: "/assets/cases/PlanetDex5.png" },
-      { src: "/assets/cases/PlanetDex6.png" },
+      { src: "/assets/cases/PlanetDex2.webp" },
+      { src: "/assets/cases/PlanetDex3.webp" },
+      { src: "/assets/cases/PlanetDex4.webp" },
+      { src: "/assets/cases/PlanetDex5.webp" },
+      { src: "/assets/cases/PlanetDex6.webp" },
     ],
   },
 ];
