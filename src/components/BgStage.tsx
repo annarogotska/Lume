@@ -1,4 +1,4 @@
-/* NUVEL — background video: looping + mouse parallax. */
+/* NUVEL — background video: ping-pong playback + mouse parallax. */
 import { useEffect, useRef } from "react";
 
 const VIDEO_SRC =
@@ -6,6 +6,41 @@ const VIDEO_SRC =
 
 export function BgStage({ on = true }: { on?: boolean }) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Ping-pong: play forward, then reverse back to the start (no hard loop cut).
+  // Browsers ignore negative playbackRate, so reverse is driven by rAF seeking.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      v.pause();
+      return;
+    }
+    let raf = 0;
+    let last = 0;
+    const reverse = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      const t = v.currentTime - dt;
+      if (t <= 0.03) {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+        return;
+      }
+      v.currentTime = t;
+      raf = requestAnimationFrame(reverse);
+    };
+    const onEnded = () => {
+      last = performance.now();
+      raf = requestAnimationFrame(reverse);
+    };
+    v.addEventListener("ended", onEnded);
+    return () => {
+      v.removeEventListener("ended", onEnded);
+      cancelAnimationFrame(raf);
+    };
+  }, [on]);
 
   useEffect(() => {
     if (
@@ -42,7 +77,7 @@ export function BgStage({ on = true }: { on?: boolean }) {
   return (
     <div className="bg-stage" aria-hidden="true">
       <div className="bg-parallax" ref={wrapRef}>
-        {on && <video autoPlay muted loop playsInline preload="auto" src={VIDEO_SRC} />}
+        {on && <video ref={videoRef} autoPlay muted playsInline preload="auto" src={VIDEO_SRC} />}
       </div>
       <div className="vignette" />
       <div className="grain" />
