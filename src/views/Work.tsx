@@ -1,7 +1,7 @@
 /* NUVEL — Work list + Case detail. */
 import { useState, useRef } from "react";
 import { Ic } from "../components/icons";
-import { Media } from "../components/ui";
+import { Media, CtaBand } from "../components/ui";
 import { useReveal } from "../components/useReveal";
 import { gsap, useGSAP, prefersReducedMotion } from "../anim/gsap";
 import { CASES, type CaseType } from "../data";
@@ -71,6 +71,20 @@ export function Work({ go }: { go: Go }) {
           </div>
         </div>
       </section>
+
+      <CtaBand
+        go={go}
+        eyebrow="Like what you see?"
+        title={
+          <>
+            Want a website or platform that <span className="serif">ships fast?</span>
+          </>
+        }
+        sub="These were designed and built end-to-end in one to two weeks. Yours could be next on the list."
+        primaryLabel="Start a project"
+        secondaryLabel="See our process"
+        secondaryTo="process"
+      />
     </div>
   );
 }

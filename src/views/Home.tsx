@@ -1,7 +1,7 @@
 /* NUVEL — Home view. */
 import { useRef } from "react";
 import { Ic } from "../components/icons";
-import { Media } from "../components/ui";
+import { Media, CtaBand } from "../components/ui";
 import { LogoMark } from "../components/LogoMark";
 import { ServiceIllo } from "../components/ServiceIllo";
 import { useReveal } from "../components/useReveal";
@@ -49,7 +49,7 @@ export function Home({ go }: { go: Go }) {
         </h1>
 
         <p className="hero-lede">
-          Whole products designed, built and shipped in one to two weeks.
+          A design &amp; build studio shipping whole websites and platforms — designed, built and live in one to two weeks.
         </p>
 
         <div className="hero-cta-center">
@@ -203,6 +203,21 @@ export function Home({ go }: { go: Go }) {
           </div>
         </div>
       </section>
+
+      {/* ---------- CLOSING CTA ---------- */}
+      <CtaBand
+        go={go}
+        eyebrow="Ready to ship?"
+        title={
+          <>
+            Your website, designed &amp; built in <span className="serif">two weeks.</span>
+          </>
+        }
+        sub="Tell us what you're building — a website, a platform or a full product — and we'll come back with a plan, fast."
+        primaryLabel="Start a project"
+        secondaryLabel="See our work"
+        secondaryTo="work"
+      />
     </div>
   );
 }

@@ -102,37 +102,47 @@ image-slot { --is-bg: transparent; }
    the video section above into the flat dark fill. */
 /* Solid footer with a sharp top edge — identical on every page (no fade). */
 .footer { position: relative; z-index: 10; background: #07070e; padding: clamp(56px, 7vw, 96px) var(--gut) clamp(32px, 5vw, 60px); }
-.foot-cta { position: relative; border-radius: 28px; padding: clamp(40px, 7vw, 88px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.4rem; margin-bottom: clamp(40px, 6vw, 80px); background: linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.09); }
-.foot-cta .h-sec { max-width: 14ch; }
-.foot-actions { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; justify-content: center; margin-top: 0.6rem; }
-.foot-mail { font-size: 0.95rem; }
-.foot-mail:hover { color: #fff; }
-/* White primary CTA (matches hero) — solid fill for contrast on the dark footer. */
-.foot-cta .btn { background: #fff; color: #000; }
-.foot-cta .btn::before { display: none; }
-.foot-cta .btn .icon-circle { background: rgba(0,0,0,0.1); color: #000; }
-.foot-cta .btn:hover { box-shadow: 0 0 24px 4px rgba(255,255,255,0.22); }
-
-.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: clamp(2rem, 4vw, 4rem); padding: clamp(40px,5vw,64px) 0; border-top: 1px solid rgba(255,255,255,0.12); }
-@media (max-width: 768px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.6rem; } .foot-brand { grid-column: 1 / -1; } }
-@media (max-width: 460px) { .foot-grid { grid-template-columns: 1fr; } }
-.foot-brand { display: flex; flex-direction: column; gap: 1.1rem; max-width: 32ch; }
-.foot-logo { display: inline-flex; align-items: center; gap: 0.55rem; }
-.foot-name { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.01em; color: #fff; }
-.foot-col { display: flex; flex-direction: column; gap: 0.7rem; align-items: flex-start; }
-.foot-col .eyebrow { margin-bottom: 0.5rem; }
-.foot-menu-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 0.7rem 1.8rem; justify-content: start; }
-.foot-col button, .foot-col a, .foot-col span:not(.eyebrow) { font-size: 0.9rem; text-align: left; }
-.foot-col button:hover, .foot-col a:hover { color: #fff; }
-.foot-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.7rem; align-self: flex-start;
-  background: #fff; color: #0d0d14 !important; font-weight: 600; font-size: 0.9rem;
-  padding: 0.65rem 1.2rem; border-radius: 999px; transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
-.foot-link:hover { transform: translateY(-2px); box-shadow: 0 0 22px 2px rgba(255,255,255,0.22); }
-@media (max-width: 768px) {
-  .foot-col { gap: 0.3rem; }
-  .foot-col a, .foot-col button:not(.foot-link) { padding: 0.45rem 0; }
+/* Editorial split — big statement left, link columns right; brand in bottom bar. */
+.foot-main {
+  display: grid; grid-template-columns: 1.3fr auto;
+  gap: clamp(2.5rem, 7vw, 7rem); align-items: start;
+  padding-bottom: clamp(40px, 5vw, 68px);
 }
-.foot-bottom { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; }
+@media (max-width: 860px) { .foot-main { grid-template-columns: 1fr; gap: clamp(2.4rem, 6vw, 3.4rem); } }
+
+.foot-lead { display: flex; flex-direction: column; align-items: flex-start; gap: 1.3rem; }
+.foot-lead .eyebrow { margin-bottom: 0.1rem; }
+.foot-headline { font-size: clamp(2.1rem, 5vw, 3.9rem); line-height: 1.04; letter-spacing: -0.02em; font-weight: 500; max-width: 15ch; }
+.foot-lead-row { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+.foot-status {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.83rem; color: rgba(255,255,255,0.78);
+  padding: 0.42rem 0.95rem 0.42rem 0.75rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+}
+.foot-dot { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: #36b69a; box-shadow: 0 0 0 0 rgba(54,182,154,0.55); animation: footPulse 2.4s ease-out infinite; }
+@keyframes footPulse { 0% { box-shadow: 0 0 0 0 rgba(54,182,154,0.55); } 70% { box-shadow: 0 0 0 6px rgba(54,182,154,0); } 100% { box-shadow: 0 0 0 0 rgba(54,182,154,0); } }
+@media (prefers-reduced-motion: reduce) { .foot-dot { animation: none; } }
+
+.foot-links { display: grid; grid-template-columns: auto auto; gap: clamp(2.5rem, 6vw, 5.5rem); justify-content: end; }
+@media (max-width: 860px) { .foot-links { justify-content: start; } }
+.foot-col { display: flex; flex-direction: column; gap: 0.85rem; align-items: flex-start; }
+.foot-col .eyebrow { margin-bottom: 0.35rem; }
+.foot-col button:not(.foot-link), .foot-col span:not(.eyebrow) { font-size: 0.92rem; text-align: left; transition: color 0.25s; }
+.foot-col button:not(.foot-link):hover { color: #fff; }
+.foot-link { display: inline-flex; align-items: center; gap: 0.5rem; align-self: flex-start;
+  background: #fff; color: #0d0d14 !important; font-weight: 600; font-size: 0.9rem;
+  padding: 0.7rem 1.3rem; border-radius: 999px; transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+.foot-link:hover { transform: translateY(-2px); box-shadow: 0 0 22px 2px rgba(255,255,255,0.22); }
+
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-top: clamp(20px, 2.5vw, 30px); border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.82rem; }
+.foot-brand-min { display: inline-flex; align-items: center; gap: 0.6rem; }
+.foot-brand-min .logo-bars { height: 1.05rem; }
+.foot-name { font-size: 1rem; font-weight: 600; letter-spacing: 0.01em; color: #fff; }
+.foot-copy { color: rgba(255,255,255,0.42); margin-left: 0.25rem; }
+.foot-top { transition: color 0.25s; }
+.foot-top:hover { color: #fff; }
 
 /* ===================== SHARED SECTION BITS ===================== */
 .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: clamp(34px, 5vw, 64px); flex-wrap: wrap; }

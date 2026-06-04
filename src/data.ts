@@ -66,6 +66,12 @@ export interface ProcessStep {
   t: string;
   d: string;
   days: string;
+  deliver: string[];
+}
+
+export interface Faq {
+  q: string;
+  a: string;
 }
 
 export interface WhyItem {
@@ -538,10 +544,45 @@ export const SERVICES: Service[] = [
 ];
 
 export const PROCESS: ProcessStep[] = [
-  { n: "01", t: "Spark", d: "A focused kickoff. We pin down the goal, the audience and the one thing this project must achieve — then sketch fast.", days: "Day 1–2" },
-  { n: "02", t: "Shape", d: "Art direction and key screens. You see real design — not lorem wireframes — within the first few days.", days: "Day 3–5" },
-  { n: "03", t: "Build", d: "Design and build move together on a shared, tested template. Daily previews mean no big-reveal surprises.", days: "Day 5–10" },
-  { n: "04", t: "Launch", d: "We ship — tested, multilingual, performance-budgeted — hand over a system you can run yourself, and stay on call.", days: "Day 10–14" },
+  { n: "01", t: "Spark", d: "A focused kickoff. We pin down the goal, the audience and the one thing this project must achieve — then sketch fast.", days: "Day 1–2", deliver: ["Goal & audience brief", "Scope and timeline", "First directions"] },
+  { n: "02", t: "Shape", d: "Art direction and key screens. You see real design — not lorem wireframes — within the first few days.", days: "Day 3–5", deliver: ["Art direction", "Key screens designed", "Design language"] },
+  { n: "03", t: "Build", d: "Design and build move together on a shared, tested template. Daily previews mean no big-reveal surprises.", days: "Day 5–10", deliver: ["Full responsive build", "Daily preview links", "Content & localisation"] },
+  { n: "04", t: "Launch", d: "We ship — tested, multilingual, performance-budgeted — hand over a system you can run yourself, and stay on call.", days: "Day 10–14", deliver: ["Tested, fast release", "Editable system handover", "Two weeks on call"] },
+];
+
+export const PRINCIPLES: WhyItem[] = [
+  { t: "Design in the browser", d: "Real screens, real content, real devices — from day one. Nothing that looks perfect in a mockup and breaks the moment it ships." },
+  { t: "Ship every week", d: "Momentum beats marathons. You get working, clickable progress at the end of each week — never a big reveal at the very end." },
+  { t: "One tight team", d: "The people who design it build it. No handoffs, no telephone game, no quality lost in translation between roles." },
+  { t: "Opinion, then your voice", d: "We arrive with a strong point of view, then shape it around your brand. A clear direction — not a menu of safe options." },
+  { t: "Quality is the deadline", d: "Fast is the method, not the excuse. Performance budgets, accessibility and clean code are non-negotiable, every time." },
+  { t: "No lock-in", d: "You leave with a system your own team can run. Clean, documented handover — the work is yours to own and extend." },
+];
+
+export interface Tool {
+  name: string;
+  c: string;
+  role: string;
+}
+
+export const TOOLS: Tool[] = [
+  { name: "Figma", c: "#f24e1e", role: "Design" },
+  { name: "React", c: "#61dafb", role: "Frontend" },
+  { name: "TypeScript", c: "#3178c6", role: "Type-safe" },
+  { name: "Vite", c: "#bd34fe", role: "Build" },
+  { name: "GSAP", c: "#88ce02", role: "Motion" },
+  { name: "Supabase", c: "#3ecf8e", role: "Backend" },
+  { name: "Claude", c: "#d97757", role: "AI pair" },
+  { name: "Vercel", c: "#ffffff", role: "Deploy" },
+];
+
+export const FAQ: Faq[] = [
+  { q: "How can you ship in two weeks?", a: "A tight scope, an opinionated process, and a team that designs and builds at the same time. We say no to the things that don't move the needle — and that buys speed without cutting quality." },
+  { q: "What do you need from us?", a: "A short kickoff, your brand assets if you have them, and one decision-maker who can give quick feedback. That's genuinely it — we drive the rest." },
+  { q: "What if my project is bigger than two weeks?", a: "We split it into shippable phases. You get something live and valuable first, then we build outward from there — so you're never waiting months to see results." },
+  { q: "How many revisions do I get?", a: "We work in fast daily loops instead of formal revision rounds. Feedback goes in continuously, while it's still cheap and easy to change — not saved up for the end." },
+  { q: "Who owns the result?", a: "You do — fully. Code, design files and content are handed over clean and documented. No lock-in, no per-seat licences, nothing tying you back to us." },
+  { q: "What happens after launch?", a: "We stay on call for two weeks to smooth out anything that comes up, and leave you a system your own team can run and edit with confidence." },
 ];
 
 export const WHY: WhyItem[] = [

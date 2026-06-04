@@ -230,8 +230,10 @@
 @keyframes flowShift { to { background-position: 220% 0; } }
 .flow-step { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 0.55rem; padding-top: 1.7rem; }
 .flow-dot { position: absolute; top: 0; left: 0; width: 14px; height: 14px; border-radius: 999px; background: #fff;
-  box-shadow: 0 0 0 5px #0b0b16, 0 0 14px rgba(255,255,255,0.45); }
-.flow-num { font-family: "Instrument Serif", Georgia, serif; font-size: 1.3rem; line-height: 1; color: rgba(255,255,255,0.4); }
+  box-shadow: 0 0 0 5px #0b0b16, 0 0 14px rgba(255,255,255,0.45); transition: transform 0.3s var(--ease), box-shadow 0.3s; }
+.flow-step:hover .flow-dot { transform: scale(1.3); box-shadow: 0 0 0 5px #0b0b16, 0 0 18px rgba(201,166,255,0.7); }
+.flow-num { font-family: "Instrument Serif", Georgia, serif; font-size: 1.3rem; line-height: 1; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+.flow-step:hover .flow-num { color: rgba(255,255,255,0.7); }
 .flow-head { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
 .flow-step h3 { font-size: clamp(1.4rem, 2.2vw, 2rem); }
 .flow-step p { font-size: 0.92rem; line-height: 1.55; color: rgba(255,255,255,0.7); max-width: 32ch; }
@@ -246,6 +248,85 @@
 @media (prefers-reduced-motion: reduce) { .proc-flow-line { animation: none; } }
 .proc-promise { padding: clamp(40px,6vw,80px); border-radius: 28px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .proc-promise .h-sec { margin: 0 auto; }
+
+/* Reusable closing CTA band */
+.cta-band { border-radius: 28px; padding: clamp(40px, 6vw, 84px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.05rem; }
+.cta-band-title { max-width: 20ch; }
+.cta-band-sub { max-width: 50ch; }
+.cta-band-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.7rem; }
+
+/* Process — inline CTA under the stepper */
+.proc-inline-cta { display: flex; align-items: center; justify-content: space-between; gap: 1.4rem; flex-wrap: wrap; margin-top: clamp(20px, 2.6vw, 32px); }
+.proc-inline-cta .muted { max-width: 44ch; font-size: 0.98rem; }
+
+/* Process — tighter vertical rhythm between blocks */
+.proc-page .section { padding-top: clamp(36px, 5vw, 72px); padding-bottom: clamp(36px, 5vw, 72px); }
+.proc-page .sec-head { margin-bottom: clamp(24px, 3.4vw, 40px); }
+.proc-page .sec-head p { color: rgba(255,255,255,0.72); }
+
+/* Process — per-step deliverables */
+.flow-deliver { list-style: none; display: flex; flex-direction: column; gap: 0.42rem; margin-top: 0.95rem; padding-top: 0.95rem; border-top: 1px solid rgba(255,255,255,0.1); }
+.flow-deliver li { position: relative; padding-left: 1.05rem; font-size: 0.84rem; color: rgba(255,255,255,0.62); line-height: 1.4; }
+.flow-deliver li::before { content: ""; position: absolute; left: 0; top: 0.52em; width: 5px; height: 5px; border-radius: 999px; background-image: var(--accent-grad); }
+@media (max-width: 760px) { .flow-deliver { max-width: 32ch; } }
+
+/* Process — principles grid */
+.prin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 26px); }
+@media (max-width: 900px) { .prin-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .prin-grid { grid-template-columns: 1fr; } }
+.prin-card { border-radius: 22px; padding: clamp(24px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 0.65rem; transition: transform 0.32s var(--ease), box-shadow 0.32s var(--ease); }
+.prin-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px -22px rgba(0,0,0,0.65); }
+.prin-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.5rem; line-height: 1; margin-bottom: 0.2rem; color: transparent; background-image: var(--accent-grad); -webkit-background-clip: text; background-clip: text; transition: transform 0.32s var(--ease); transform-origin: left center; }
+.prin-card:hover .prin-n { transform: scale(1.12); }
+.prin-card h3 { font-size: clamp(1.2rem, 1.8vw, 1.45rem); letter-spacing: -0.01em; }
+.prin-card p { font-size: 0.92rem; line-height: 1.55; }
+
+/* Process — stack (compact editorial hover list, two columns) */
+.stack-panel { border-radius: 28px; padding: clamp(14px, 2vw, 28px) clamp(20px, 3vw, 44px); }
+.stack-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(1.4rem, 4vw, 3.4rem); }
+@media (max-width: 640px) { .stack-list { grid-template-columns: 1fr; } }
+.stack-item { position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.stack-item:nth-last-child(-n+2) { border-bottom: none; }
+@media (max-width: 640px) { .stack-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.1); } .stack-item:last-child { border-bottom: none; } }
+.stack-item::before { content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tc, #fff) 16%, transparent), transparent 55%); }
+.stack-item:hover::before { opacity: 1; }
+.stack-row { position: relative; z-index: 1; display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: clamp(0.7rem, 1.6vw, 1.2rem);
+  padding: clamp(13px, 1.5vw, 18px) clamp(8px, 1.2vw, 16px); transition: padding-left 0.35s var(--ease); }
+.stack-item:hover .stack-row { padding-left: clamp(16px, 2vw, 26px); }
+.stack-index { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; color: rgba(255,255,255,0.32); transition: color 0.35s; }
+.stack-item:hover .stack-index { color: var(--tc, #fff); }
+.stack-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--tc, #fff); transform: scale(0.6); opacity: 0.55; transition: transform 0.35s var(--ease), opacity 0.35s, box-shadow 0.35s; }
+.stack-item:hover .stack-dot { transform: scale(1); opacity: 1; box-shadow: 0 0 14px var(--tc, #fff); }
+.stack-name { font-size: clamp(1.15rem, 1.9vw, 1.5rem); font-weight: 500; letter-spacing: -0.01em; color: rgba(255,255,255,0.92); transition: color 0.35s; }
+.stack-item:hover .stack-name { color: #fff; }
+.stack-role { justify-self: end; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.4); transition: color 0.35s, transform 0.35s var(--ease); }
+.stack-item:hover .stack-role { color: rgba(255,255,255,0.85); transform: translateX(-4px); }
+
+/* Process — FAQ (split panel with frosted background) */
+.faq-panel { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(2rem, 5vw, 5rem); border-radius: 28px; padding: clamp(30px, 4vw, 60px); align-items: start; }
+@media (max-width: 900px) { .faq-panel { grid-template-columns: 1fr; gap: 1.4rem; } }
+.faq-aside { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 96px; }
+@media (max-width: 900px) { .faq-aside { position: static; } }
+.faq-aside .h-sec { max-width: 12ch; }
+.faq-aside p { max-width: 34ch; }
+.faq-cta { margin-top: 0.5rem; display: inline-flex; align-items: center; gap: 0.5rem; align-self: flex-start; font-weight: 500; color: #fff; transition: gap 0.25s var(--ease); }
+.faq-cta span { transition: transform 0.25s var(--ease); }
+.faq-cta:hover span { transform: translateX(4px); }
+
+.faq-list { display: flex; flex-direction: column; }
+.faq-item { border-top: 1px solid rgba(255,255,255,0.12); }
+.faq-item:first-child { border-top: none; }
+.faq-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.12); }
+.faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: clamp(20px, 2.4vw, 30px) 0; font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 500; color: rgba(255,255,255,0.92); transition: color 0.25s; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: #fff; }
+.faq-mark { position: relative; flex: 0 0 auto; width: 18px; height: 18px; }
+.faq-mark::before, .faq-mark::after { content: ""; position: absolute; left: 50%; top: 50%; background: rgba(255,255,255,0.7); transition: transform 0.3s var(--ease); }
+.faq-mark::before { width: 14px; height: 2px; transform: translate(-50%, -50%); }
+.faq-mark::after { width: 2px; height: 14px; transform: translate(-50%, -50%); }
+.faq-item[open] .faq-mark::after { transform: translate(-50%, -50%) scaleY(0); }
+.faq-item > p { max-width: 72ch; padding-bottom: clamp(20px, 2.4vw, 30px); margin-top: -0.3rem; font-size: 0.98rem; line-height: 1.6; }
 
 /* ===================== CONTACT ===================== */
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 72px); align-items: start; }

@@ -108,7 +108,7 @@ export default function App() {
   else if (route === "work") view = <Work go={go} />;
   else if (route === "case") view = <CaseDetail id={id} go={go} />;
   else if (route === "services") view = <Services go={go} />;
-  else if (route === "process") view = <Process />;
+  else if (route === "process") view = <Process go={go} />;
   else if (route === "contact") view = <Contact go={go} />;
   else view = <Home go={go} />;
 

@@ -1,5 +1,6 @@
 /* NUVEL — Services view. */
 import { Ic } from "../components/icons";
+import { CtaBand } from "../components/ui";
 import { useReveal } from "../components/useReveal";
 import { SERVICES } from "../data";
 import type { Go } from "../router";
@@ -100,6 +101,20 @@ export function Services({ go }: { go: Go }) {
           </div>
         </div>
       </section>
+
+      <CtaBand
+        go={go}
+        eyebrow="Not sure which fits?"
+        title={
+          <>
+            Let's scope your website or <span className="serif">platform.</span>
+          </>
+        }
+        sub="Sprint, project or partner — tell us the goal and we'll map the fastest path to a website, platform or design system that ships."
+        primaryLabel="Start a project"
+        secondaryLabel="See our work"
+        secondaryTo="work"
+      />
     </div>
   );
 }
