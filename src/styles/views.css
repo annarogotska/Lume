@@ -202,9 +202,17 @@
 
 /* ===================== PROCESS ===================== */
 .proc-stack { display: flex; flex-direction: column; gap: clamp(14px,1.8vw,20px); }
-.proc-step { display: grid; grid-template-columns: 120px 1fr; gap: clamp(20px,3vw,48px); padding: clamp(28px,3.4vw,48px); border-radius: 24px; align-items: start; }
+.proc-step { position: relative; overflow: hidden; display: grid; grid-template-columns: 120px 1fr; gap: clamp(20px,3vw,48px); padding: clamp(28px,3.4vw,48px); border-radius: 24px; align-items: start; --c: #8b6cf0; }
+.proc-step:nth-child(2) { --c: #ec6a9c; }
+.proc-step:nth-child(3) { --c: #f0a24c; }
+.proc-step:nth-child(4) { --c: #36b69a; }
+/* colored spine on the left edge — widens on hover */
+.proc-step::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c); transition: width 0.35s var(--ease); }
+.proc-step:hover::before { width: 9px; }
 @media (max-width: 600px) { .proc-step { grid-template-columns: 1fr; gap: 1rem; } }
-.proc-n { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 500; letter-spacing: -0.06em; color: rgba(255,255,255,0.32); line-height: 1; }
+.proc-n { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 500; letter-spacing: -0.06em; color: var(--c); line-height: 1; transition: transform 0.35s var(--ease); transform-origin: left center; }
+.proc-step:hover .proc-n { transform: scale(1.08); }
+.proc-step .tag { color: var(--c); }
 .proc-head { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .proc-promise { padding: clamp(40px,6vw,80px); border-radius: 28px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .proc-promise .h-sec { margin: 0 auto; }
