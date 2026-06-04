@@ -18,9 +18,6 @@ export function Footer({ go, name }: { go: Go; name: string }) {
           </h2>
           <div className="foot-actions">
             <CTA onClick={() => go("contact")}>Start a project</CTA>
-            <a className="foot-mail muted-8" href={"mailto:" + STUDIO.email}>
-              {STUDIO.email}
-            </a>
           </div>
         </div>
 
@@ -41,9 +38,9 @@ export function Footer({ go, name }: { go: Go; name: string }) {
           </div>
           <div className="foot-col">
             <span className="eyebrow">Get in touch</span>
-            <a className="muted-8" href={"mailto:" + STUDIO.email}>
-              {STUDIO.email}
-            </a>
+            <button className="muted-8" onClick={() => go("contact")}>
+              Start a project
+            </button>
           </div>
         </div>
         <div className="foot-bottom muted-2">

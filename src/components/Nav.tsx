@@ -61,7 +61,7 @@ export function Nav({ route, go, name }: { route: Route; go: Go; name: string })
               </button>
             ))}
           </div>
-          <div className="mm-foot muted-2">{STUDIO.email}</div>
+          <div className="mm-foot muted-2">{STUDIO.tagline}</div>
         </div>
       )}
     </Fragment>

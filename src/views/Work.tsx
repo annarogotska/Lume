@@ -4,7 +4,7 @@ import { Ic } from "../components/icons";
 import { Media } from "../components/ui";
 import { useReveal } from "../components/useReveal";
 import { gsap, useGSAP, prefersReducedMotion } from "../anim/gsap";
-import { CASES, STUDIO, type CaseType } from "../data";
+import { CASES, type CaseType } from "../data";
 import type { Go } from "../router";
 
 export function Work({ go }: { go: Go }) {
@@ -264,9 +264,6 @@ export function CaseDetail({ id, go }: { id: string | null; go: Go }) {
                 Start a project
                 <span className="case-cta-arrow">{Ic.arrowUpRight()}</span>
               </button>
-              <a className="case-cta-mail" href={"mailto:" + STUDIO.email}>
-                {STUDIO.email}
-              </a>
             </div>
           </div>
         </div>

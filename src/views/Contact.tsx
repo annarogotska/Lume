@@ -1,8 +1,8 @@
-/* NUVEL — Contact view (demo form, no data sent). */
+/* NUVEL — Contact view. Submits to Supabase (stores lead + emails the studio). */
 import { useState } from "react";
 import { Ic } from "../components/icons";
 import { useReveal } from "../components/useReveal";
-import { STUDIO } from "../data";
+import { submitContact } from "../lib/supabase";
 import type { Go } from "../router";
 
 interface FormState {
@@ -16,12 +16,31 @@ interface FormState {
 export function Contact({ go }: { go: Go }) {
   const [form, setForm] = useState<FormState>({ name: "", email: "", type: "Website", budget: "", msg: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   useReveal([sent]);
   const set = (k: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm({ ...form, [k]: e.target.value });
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    if (sending) return;
+    setSending(true);
+    setError(null);
+    try {
+      await submitContact({
+        name: form.name,
+        email: form.email,
+        type: form.type,
+        budget: form.budget,
+        message: form.msg,
+      });
+      setSent(true);
+    } catch (err) {
+      setError("Something went wrong sending your brief. Please try again, or email us directly.");
+      console.error(err);
+    } finally {
+      setSending(false);
+    }
   };
   return (
     <div className="view view-enter">
@@ -35,14 +54,8 @@ export function Contact({ go }: { go: Go }) {
               something <span className="serif">fast.</span>
             </h1>
             <p className="lede" style={{ maxWidth: "38ch", marginTop: "1.4rem" }}>
-              Tell us what you're making. We reply within one business day — usually with first ideas already brewing.
+              Tell us what you're making. Fill in the brief and we'll reply within one business day — usually with first ideas already brewing.
             </p>
-            <div className="contact-direct">
-              <a className="contact-mail liquid-glass hover-pop" href={"mailto:" + STUDIO.email}>
-                <span className="icon-circle">{Ic.arrowUpRight()}</span>
-                {STUDIO.email}
-              </a>
-            </div>
           </div>
 
           <div className="contact-right liquid-glass-strong reveal">
@@ -107,11 +120,17 @@ export function Contact({ go }: { go: Go }) {
                 <button
                   className="btn liquid-glass-strong hover-pop"
                   type="submit"
-                  style={{ alignSelf: "flex-start", marginTop: ".4rem" }}
+                  disabled={sending}
+                  style={{ alignSelf: "flex-start", marginTop: ".4rem", opacity: sending ? 0.6 : 1 }}
                 >
-                  <span>Send brief</span>
+                  <span>{sending ? "Sending…" : "Send brief"}</span>
                   <span className="icon-circle">{Ic.arrow()}</span>
                 </button>
+                {error && (
+                  <p className="form-error" role="alert">
+                    {error}
+                  </p>
+                )}
               </form>
             )}
           </div>

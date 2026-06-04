@@ -3,7 +3,6 @@
 export interface Studio {
   name: string;
   tagline: string;
-  email: string;
   location: string;
 }
 
@@ -77,7 +76,6 @@ export interface WhyItem {
 export const STUDIO: Studio = {
   name: "Nuvel",
   tagline: "Design at the speed of thought",
-  email: "hello@nuvel.studio",
   location: "Remote-first · Europe",
 };
 
