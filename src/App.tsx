@@ -13,8 +13,28 @@ import { Work, CaseDetail } from "./views/Work";
 import { Services } from "./views/Services";
 import { Process } from "./views/Process";
 import { Contact } from "./views/Contact";
-import { STUDIO } from "./data";
-import { parseHash, type Go } from "./router";
+import { STUDIO, CASES } from "./data";
+import { parseHash, type Go, type Route } from "./router";
+
+const TAGLINE = "Design at the speed of thought";
+const META: Record<Route, { title: string; desc: string }> = {
+  home: { title: `Nuvel — ${TAGLINE}`, desc: "A design & build studio. Fast, fearless websites — and the platforms behind them — designed, built and shipped in one to two weeks." },
+  work: { title: "Work — Nuvel", desc: "Selected websites and platforms — brand to checkout, marketplace to launchpad. Most shipped end-to-end in one to two weeks." },
+  case: { title: `Case study — Nuvel`, desc: "A Nuvel case study — the challenge, the approach and the result." },
+  services: { title: "Services — Nuvel", desc: "Websites, platforms & CRM, brand and design systems — designed, built and shipped fast." },
+  process: { title: "Process — Nuvel", desc: "A tight four-step rhythm — Spark, Shape, Build, Launch — from brief to launched in two weeks." },
+  contact: { title: "Start a project — Nuvel", desc: "Tell us what you're building. We reply within one business day." },
+};
+
+function setMeta(attr: "name" | "property", key: string, value: string) {
+  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", value);
+}
 
 const LOOK = {
   accent: "#ffffff",
@@ -63,8 +83,26 @@ export default function App() {
         ? "grayscale(1) contrast(1.06) brightness(0.85)"
         : "contrast(1.05) brightness(0.95) saturate(1.12)",
     );
-    document.title = name + " — Design at the speed of thought";
-  }, [name]);
+  }, []);
+
+  // Per-route document title + meta description / Open Graph (basic SEO).
+  useEffect(() => {
+    const base = META[route] ?? META.home;
+    let { title, desc } = base;
+    if (route === "case" && id) {
+      const c = CASES.find((x) => x.id === id);
+      if (c) {
+        title = `${c.title} — Nuvel`;
+        desc = c.tldr;
+      }
+    }
+    document.title = title;
+    setMeta("name", "description", desc);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", desc);
+    setMeta("name", "twitter:title", title);
+    setMeta("name", "twitter:description", desc);
+  }, [route, id]);
 
   let view;
   if (route === "home") view = <Home go={go} />;
