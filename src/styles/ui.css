@@ -100,8 +100,8 @@ image-slot { --is-bg: transparent; }
 /* ===================== FOOTER ===================== */
 /* Solid dark footer — the fixed background video stops here. A top fade blends
    the video section above into the flat dark fill. */
-.footer { position: relative; z-index: 10; background: #07070e; padding: clamp(72px, 9vw, 120px) var(--gut) clamp(32px, 5vw, 60px); }
-.footer::before { content: ""; position: absolute; left: 0; right: 0; top: -140px; height: 140px; background: linear-gradient(180deg, transparent, #07070e); pointer-events: none; }
+/* Solid footer with a sharp top edge — identical on every page (no fade). */
+.footer { position: relative; z-index: 10; background: #07070e; padding: clamp(56px, 7vw, 96px) var(--gut) clamp(32px, 5vw, 60px); }
 .foot-cta { position: relative; border-radius: 28px; padding: clamp(40px, 7vw, 88px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.4rem; margin-bottom: clamp(40px, 6vw, 80px); background: linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.09); }
 .foot-cta .h-sec { max-width: 14ch; }
 .foot-actions { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; justify-content: center; margin-top: 0.6rem; }

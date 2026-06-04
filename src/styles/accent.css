@@ -31,7 +31,6 @@
 html.theme-light, html.theme-light body { background: #ffffff; }
 html.theme-light .bg-stage { display: none; }
 /* Footer: hard white→dark edge on the light page (no gradient fade). */
-html.theme-light .footer::before { display: none; }
 
 /* Case hero = dark band at the top (header + cover image); rest stays white. */
 html.theme-light .case-head-sec { background: #0a0a13; }
