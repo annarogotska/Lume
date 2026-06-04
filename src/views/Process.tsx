@@ -21,21 +21,21 @@ export function Process() {
       </section>
 
       <section className="section" style={{ paddingTop: 0 }}>
-        <div className="wrap proc-stack">
-          {PROCESS.map((p, i) => (
-            <div className="proc-step liquid-glass reveal" data-delay={i * 80} key={p.n}>
-              <div className="proc-n">{p.n}</div>
-              <div className="proc-body">
-                <div className="proc-head">
-                  <h2 className="h-sec">{p.t}</h2>
+        <div className="wrap">
+          <div className="proc-flow reveal">
+            <span className="proc-flow-line" aria-hidden="true" />
+            {PROCESS.map((p) => (
+              <div className="flow-step" key={p.n}>
+                <span className="flow-dot" aria-hidden="true" />
+                <span className="flow-num">{p.n}</span>
+                <div className="flow-head">
+                  <h3>{p.t}</h3>
                   <span className="tag liquid-glass">{p.days}</span>
                 </div>
-                <p className="muted" style={{ maxWidth: "52ch", marginTop: ".8rem" }}>
-                  {p.d}
-                </p>
+                <p className="muted">{p.d}</p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 

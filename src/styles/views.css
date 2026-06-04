@@ -221,21 +221,28 @@
 }
 
 /* ===================== PROCESS ===================== */
-.proc-stack { display: flex; flex-direction: column; gap: clamp(14px,1.8vw,20px); }
-/* Each step: content on the left, an oversized ghost numeral bleeding off the right. */
-.proc-step { position: relative; overflow: hidden; padding: clamp(32px,4vw,56px); border-radius: 24px; }
-.proc-n { position: absolute; right: clamp(4px,1.5vw,40px); top: 50%; transform: translateY(-50%);
-  font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: clamp(6rem, 15vw, 13rem);
-  line-height: 0.8; letter-spacing: -0.04em; color: rgba(255,255,255,0.06); pointer-events: none; user-select: none;
-  transition: color 0.45s var(--ease), transform 0.55s var(--ease); }
-.proc-step:hover .proc-n { color: rgba(255,255,255,0.11); transform: translateY(-50%) scale(1.05); }
-.proc-body { position: relative; z-index: 1; max-width: 56ch; }
-.proc-head { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-@media (max-width: 700px) {
-  .proc-n { font-size: 7rem; right: -0.4rem; top: 1.4rem; transform: none; }
-  .proc-step:hover .proc-n { transform: scale(1.05); }
-  .proc-body { max-width: 100%; padding-top: 1.5rem; }
+/* Process shown as a connected flow: a line links four nodes left → right. */
+.proc-flow { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 2.6vw, 44px); }
+.proc-flow-line { position: absolute; left: 7px; right: 7px; top: 6px; height: 2px; border-radius: 2px;
+  background-image: var(--accent-grad); background-size: 220% 100%;
+  animation: flowShift 6s linear infinite; }
+@keyframes flowShift { to { background-position: 220% 0; } }
+.flow-step { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 0.55rem; padding-top: 1.7rem; }
+.flow-dot { position: absolute; top: 0; left: 0; width: 14px; height: 14px; border-radius: 999px; background: #fff;
+  box-shadow: 0 0 0 5px #0b0b16, 0 0 14px rgba(255,255,255,0.45); }
+.flow-num { font-family: "Instrument Serif", Georgia, serif; font-size: 1.3rem; line-height: 1; color: rgba(255,255,255,0.4); }
+.flow-head { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+.flow-step h3 { font-size: clamp(1.4rem, 2.2vw, 2rem); }
+.flow-step p { font-size: 0.92rem; line-height: 1.55; color: rgba(255,255,255,0.6); max-width: 32ch; }
+@media (max-width: 768px) {
+  .proc-flow { grid-template-columns: 1fr; gap: 0; padding-left: 0.5rem; }
+  .proc-flow-line { left: 7px; right: auto; top: 7px; bottom: 7px; width: 2px; height: auto;
+    background-size: 100% 220%; animation: flowShiftV 6s linear infinite; }
+  .flow-step { padding: 0 0 clamp(28px, 6vw, 44px) 2.2rem; }
+  .flow-dot { top: 4px; }
 }
+@keyframes flowShiftV { to { background-position: 0 220%; } }
+@media (prefers-reduced-motion: reduce) { .proc-flow-line { animation: none; } }
 .proc-promise { padding: clamp(40px,6vw,80px); border-radius: 28px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .proc-promise .h-sec { margin: 0 auto; }
 
