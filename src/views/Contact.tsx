@@ -67,8 +67,8 @@ export function Contact({ go }: { go: Go }) {
                 <h2 className="h-sec" style={{ fontSize: "clamp(1.8rem,4vw,2.6rem)" }}>
                   Got it.
                 </h2>
-                <p className="muted" style={{ marginTop: "1rem", maxWidth: "30ch" }}>
-                  Thanks {form.name || "there"} — we'll be in touch within a day. (Demo form — no data is sent.)
+                <p className="muted" style={{ marginTop: "1rem", maxWidth: "32ch" }}>
+                  Thanks {form.name || "there"} — your brief's in, we'll be in touch within one business day.
                 </p>
                 <button
                   className="btn-ghost liquid-glass hover-pop"
