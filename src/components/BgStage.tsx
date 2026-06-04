@@ -1,47 +1,64 @@
-/* NUVEL — background video: ping-pong playback + mouse parallax. */
+/* NUVEL — background video: crossfade-loop (soft dissolve at the seam) + mouse parallax. */
 import { useEffect, useRef } from "react";
 
 const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_080827_a9e5ad52-b6ee-4e79-b393-d936f179cfd7.mp4";
 
+const FADE = 1; // seconds of crossfade overlap
+const VISIBLE = "0.8"; // resting opacity (matches the screen-blend look)
+
+// On touch / small screens skip the video entirely — the gradient backdrop
+// carries the look, and decoding two clips would waste battery and data.
+const LITE =
+  typeof window !== "undefined" && window.matchMedia("(hover: none), (max-width: 768px)").matches;
+
 export function BgStage({ on = true }: { on?: boolean }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const aRef = useRef<HTMLVideoElement>(null);
+  const bRef = useRef<HTMLVideoElement>(null);
+  const showVideo = on && !LITE;
 
-  // Ping-pong: play forward, then reverse back to the start (no hard loop cut).
-  // Browsers ignore negative playbackRate, so reverse is driven by rAF seeking.
+  // Crossfade loop: when the active clip nears its end, start the idle copy from
+  // 0 and dissolve between them — no hard loop cut. (Real reverse playback isn't
+  // possible in browsers: negative playbackRate is ignored and frame-seeking stalls.)
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
+    const a = aRef.current;
+    const b = bRef.current;
+    if (!a || !b) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      v.pause();
+      a.pause();
       return;
     }
-    let raf = 0;
-    let last = 0;
-    const reverse = (now: number) => {
-      const dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-      const t = v.currentTime - dt;
-      if (t <= 0.03) {
-        v.currentTime = 0;
-        v.play().catch(() => {});
-        return;
-      }
-      v.currentTime = t;
-      raf = requestAnimationFrame(reverse);
+    let active: HTMLVideoElement = a;
+    let switching = false;
+    const onTick = (e: Event) => {
+      const v = e.target as HTMLVideoElement;
+      if (v !== active || switching || !v.duration) return;
+      if (v.currentTime < v.duration - FADE) return;
+      switching = true;
+      const other = v === a ? b : a;
+      other.currentTime = 0;
+      other.style.opacity = VISIBLE;
+      other.play().catch(() => {});
+      v.style.opacity = "0";
+      active = other;
+      window.setTimeout(() => {
+        v.pause();
+        switching = false;
+      }, FADE * 1000);
     };
-    const onEnded = () => {
-      last = performance.now();
-      raf = requestAnimationFrame(reverse);
-    };
-    v.addEventListener("ended", onEnded);
+    a.addEventListener("timeupdate", onTick);
+    b.addEventListener("timeupdate", onTick);
+    a.style.opacity = VISIBLE;
+    b.style.opacity = "0";
+    a.play().catch(() => {});
     return () => {
-      v.removeEventListener("ended", onEnded);
-      cancelAnimationFrame(raf);
+      a.removeEventListener("timeupdate", onTick);
+      b.removeEventListener("timeupdate", onTick);
     };
-  }, [on]);
+  }, [showVideo]);
 
+  // mouse parallax
   useEffect(() => {
     if (
       window.matchMedia("(hover: none)").matches ||
@@ -77,7 +94,12 @@ export function BgStage({ on = true }: { on?: boolean }) {
   return (
     <div className="bg-stage" aria-hidden="true">
       <div className="bg-parallax" ref={wrapRef}>
-        {on && <video ref={videoRef} autoPlay muted playsInline preload="auto" src={VIDEO_SRC} />}
+        {showVideo && (
+          <>
+            <video ref={aRef} className="bg-video" muted playsInline preload="auto" src={VIDEO_SRC} />
+            <video ref={bRef} className="bg-video" muted playsInline preload="auto" src={VIDEO_SRC} />
+          </>
+        )}
       </div>
       <div className="vignette" />
       <div className="grain" />

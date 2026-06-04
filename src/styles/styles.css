@@ -129,6 +129,7 @@ img { display: block; max-width: 100%; }
   mix-blend-mode: screen;
   opacity: 0.8;
   filter: var(--video-filter, contrast(1.05) brightness(0.95) saturate(1.12));
+  transition: opacity 1s linear;
 }
 .bg-stage .vignette {
   position: absolute;
@@ -270,7 +271,7 @@ img { display: block; max-width: 100%; }
 .btn .icon-circle { width: 1.9rem; height: 1.9rem; }
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 0.55rem;
-  padding: 0.7rem 1.2rem; border-radius: 999px;
+  padding: 0.8rem 1.3rem; border-radius: 999px;
   font-size: 0.85rem; color: rgba(255,255,255,0.85);
 }
 /* Bare inline icons have no intrinsic size — constrain so they never stretch. */
