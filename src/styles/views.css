@@ -64,9 +64,8 @@
 
 /* ===================== WORK FILTER ===================== */
 .filter-row { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: clamp(30px, 4vw, 44px); }
-.filter-pill { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.7rem 0.6rem 1.2rem; border-radius: 999px; font-size: 0.9rem; color: rgba(255,255,255,0.7); transition: color 0.3s, background 0.3s; }
+.filter-pill { display: inline-flex; align-items: center; padding: 0.6rem 1.3rem; border-radius: 999px; font-size: 0.9rem; color: rgba(255,255,255,0.7); transition: color 0.3s, background 0.3s; }
 .filter-pill.on { color: #fff; background: rgba(255,255,255,0.12); }
-.filter-count { min-width: 1.6rem; height: 1.6rem; padding: 0 0.4rem; border-radius: 999px; background: rgba(255,255,255,0.1); display: grid; place-items: center; font-size: 0.75rem; }
 
 /* ===================== CASE DETAIL ===================== */
 .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; margin-bottom: 1.4rem; padding: 0.4rem 0; }

@@ -34,9 +34,6 @@ export function Work({ go }: { go: Go }) {
               >
                 {t}
                 {t !== "All" ? "s" : ""}
-                <span className="filter-count">
-                  {t === "All" ? CASES.length : CASES.filter((c) => c.type === t).length}
-                </span>
               </button>
             ))}
           </div>
