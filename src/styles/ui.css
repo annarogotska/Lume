@@ -121,6 +121,7 @@ image-slot { --is-bg: transparent; }
 .foot-name { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.01em; color: #fff; }
 .foot-col { display: flex; flex-direction: column; gap: 0.7rem; align-items: flex-start; }
 .foot-col .eyebrow { margin-bottom: 0.5rem; }
+.foot-menu-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 0.7rem 1.8rem; justify-content: start; }
 .foot-col button, .foot-col a, .foot-col span:not(.eyebrow) { font-size: 0.9rem; text-align: left; }
 .foot-col button:hover, .foot-col a:hover { color: #fff; }
 .foot-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.7rem; align-self: flex-start;

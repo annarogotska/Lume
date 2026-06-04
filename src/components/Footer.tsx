@@ -31,11 +31,13 @@ export function Footer({ go, name }: { go: Go; name: string }) {
           </div>
           <div className="foot-col">
             <span className="eyebrow">Menu</span>
-            {NAV.map((n) => (
-              <button key={n.k} className="muted-8" onClick={() => go(n.k)}>
-                {n.label}
-              </button>
-            ))}
+            <div className="foot-menu-grid">
+              {NAV.map((n) => (
+                <button key={n.k} className="muted-8" onClick={() => go(n.k)}>
+                  {n.label}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="foot-col">
             <span className="eyebrow">Studio</span>
