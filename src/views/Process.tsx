@@ -22,7 +22,8 @@ export function Process() {
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="proc-flow reveal">
+          <div className="proc-panel reveal">
+          <div className="proc-flow">
             <span className="proc-flow-line" aria-hidden="true" />
             {PROCESS.map((p) => (
               <div className="flow-step" key={p.n}>
@@ -35,6 +36,7 @@ export function Process() {
                 <p className="muted">{p.d}</p>
               </div>
             ))}
+          </div>
           </div>
         </div>
       </section>
