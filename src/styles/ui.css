@@ -1,0 +1,142 @@
+/* NUVEL — UI chrome: nav, footer, cards, marquee, slots */
+
+/* ===================== NAV ===================== */
+.nav-bar {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 60;
+  white-space: nowrap; max-width: calc(100vw - 24px);
+}
+.nav-pill {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.4rem 0.4rem 0.9rem;
+  border-radius: 999px;
+}
+.nav-logo { display: flex; align-items: center; gap: 0.5rem; padding: 0 0.5rem 0 0.4rem; }
+.logo-bars { display: block; height: 1.15rem; width: auto; }
+.nav-name { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em; color: #fff; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 0.1rem;
+}
+.nav-link {
+  padding: 0.5rem 0.9rem; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 400; color: rgba(255,255,255,0.7);
+  transition: color 0.3s, background 0.3s;
+}
+.nav-link:hover { color: #fff; }
+.nav-link.active { color: #fff; background: rgba(255,255,255,0.10); }
+
+.nav-cta {
+  margin-left: 0.4rem;
+  padding: 0.55rem 1.1rem; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 500; color: #fff;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 16px 2px rgba(255,255,255,0.12); }
+.nav-cta:active { transform: scale(0.97); }
+.nav-burger { display: none; width: 2.4rem; height: 2.4rem; border-radius: 999px; align-items: center; justify-content: center; }
+.nav-burger svg { width: 1.2rem; height: 1.2rem; }
+
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-burger { display: inline-flex; }
+}
+
+/* mobile menu */
+.mobile-menu {
+  position: fixed; inset: 12px; z-index: 80;
+  border-radius: 28px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(28px, 8vw, 60px);
+}
+.mm-close { position: absolute; top: 22px; right: 22px; width: 3rem; height: 3rem; border-radius: 999px; display: grid; place-items: center; }
+.mm-links { display: flex; flex-direction: column; gap: 0.4rem; }
+.mm-links button {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: clamp(2rem, 9vw, 3.6rem); font-weight: 500; letter-spacing: -0.05em;
+  text-align: left; padding: 0.3rem 0; color: #fff;
+}
+html.play .mm-links button { animation: mmIn 0.6s var(--ease) both; }
+.mm-links button svg { width: 1.4rem; height: 1.4rem; opacity: 0.45; margin-left: auto; }
+.mm-n { font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; align-self: flex-start; margin-top: 0.7rem; }
+@keyframes mmIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.mm-foot { margin-top: 2.5rem; font-size: 0.9rem; }
+
+/* ===================== MARQUEE ===================== */
+.marquee { overflow: hidden; padding: 1.1rem 0; -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: inline-flex; gap: 2.6rem; white-space: nowrap; animation: scroll 32s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-item { font-size: clamp(1.1rem, 2.2vw, 1.7rem); letter-spacing: -0.03em; color: rgba(255,255,255,0.55); display: inline-flex; align-items: center; gap: 2.6rem; }
+.marquee-item::after { content: "✦"; font-size: 0.7em; color: rgba(255,255,255,0.3); }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* ===================== SLOTS / IMAGES ===================== */
+.slot-frame { position: relative; overflow: hidden; width: 100%; }
+.slot-frame img, .slot-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Some source mp4s carry thin black letterbox bars baked into the frame —
+   a tiny crop-scale eats those edges (overflow:hidden on .slot-frame clips it). */
+.slot-frame video { transform: scale(1.025); }
+image-slot { --is-bg: transparent; }
+
+/* striped fallback look handled by image-slot's own placeholder */
+
+/* ===================== WORK CARDS ===================== */
+.work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px, 2.4vw, 34px); }
+@media (max-width: 768px) { .work-grid { grid-template-columns: 1fr; } }
+
+.work-card { text-align: left; display: flex; flex-direction: column; gap: 1rem; border-radius: 24px; padding: 0.9rem; }
+.work-card .slot-frame { border-radius: 16px; }
+.work-card .wc-cover { aspect-ratio: 16/10; }
+.work-card-head { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; padding: 0.3rem 0.6rem 0.7rem; }
+.work-card-head > div { flex: 1 1 auto; min-width: 0; }
+.work-card h3 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); text-wrap: wrap; }
+.work-card .wc-meta { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.5rem; flex-wrap: wrap; }
+.wc-tool { display: inline-block; margin-top: 0.55rem; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.tag { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 999px; color: rgba(255,255,255,0.75); }
+.wc-arrow { width: 2.4rem; height: 2.4rem; border-radius: 999px; display: grid; place-items: center; flex: 0 0 auto; transition: transform 0.4s var(--ease); }
+.work-card:hover .wc-arrow { transform: rotate(45deg); }
+.wc-arrow svg { width: 1.1rem; height: 1.1rem; }
+
+/* ===================== FOOTER ===================== */
+/* Solid dark footer — the fixed background video stops here. A top fade blends
+   the video section above into the flat dark fill. */
+.footer { position: relative; z-index: 10; background: #07070e; padding: clamp(72px, 9vw, 120px) var(--gut) clamp(32px, 5vw, 60px); }
+.footer::before { content: ""; position: absolute; left: 0; right: 0; top: -140px; height: 140px; background: linear-gradient(180deg, transparent, #07070e); pointer-events: none; }
+.foot-cta { position: relative; border-radius: 28px; padding: clamp(40px, 7vw, 88px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.4rem; margin-bottom: clamp(40px, 6vw, 80px); background: linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.09); }
+.foot-cta .h-sec { max-width: 14ch; }
+.foot-actions { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; justify-content: center; margin-top: 0.6rem; }
+.foot-mail { font-size: 0.95rem; }
+.foot-mail:hover { color: #fff; }
+/* White primary CTA (matches hero) — solid fill for contrast on the dark footer. */
+.foot-cta .btn { background: #fff; color: #000; }
+.foot-cta .btn::before { display: none; }
+.foot-cta .btn .icon-circle { background: rgba(0,0,0,0.1); color: #000; }
+.foot-cta .btn:hover { box-shadow: 0 0 24px 4px rgba(255,255,255,0.22); }
+
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; padding: clamp(30px,4vw,48px) 0; border-top: 1px solid rgba(255,255,255,0.12); }
+@media (max-width: 768px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 1.6rem; } .foot-brand { grid-column: 1 / -1; } }
+.foot-brand { display: flex; flex-direction: column; gap: 1rem; max-width: 30ch; }
+.foot-col { display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start; }
+.foot-col .eyebrow { margin-bottom: 0.2rem; }
+.foot-col button, .foot-col a { font-size: 0.9rem; text-align: left; }
+.foot-col button:hover, .foot-col a:hover { color: #fff; }
+.foot-bottom { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; }
+
+/* ===================== SHARED SECTION BITS ===================== */
+.sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: clamp(34px, 5vw, 64px); flex-wrap: wrap; }
+/* No ch-based cap here: `ch` resolves against the 16px base, but .titles holds a
+   clamp(...4.6rem) serif heading — a ~194px cap crushed it to one word per line.
+   Let the heading size to its own <br/> lines instead. */
+.sec-head .titles { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.sec-head p { max-width: 38ch; }
+/* Below desktop the title + supporting text/CTA stack full width. */
+@media (max-width: 1024px) {
+  .sec-head { flex-direction: column; align-items: flex-start; gap: clamp(16px, 3vw, 26px); }
+  .sec-head p { max-width: 52ch; }
+}
+
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.6vw, 22px); }
+@media (max-width: 768px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+.stat { padding: 1.5rem 1.6rem; border-radius: 20px; }
+.stat .v { font-size: clamp(2rem, 4vw, 3.1rem); letter-spacing: -0.05em; font-weight: 500; }
+.stat .k { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 0.4rem; }

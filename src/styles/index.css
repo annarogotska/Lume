@@ -1,0 +1,5 @@
+/* Order matches the prototype's <head>: styles → ui → views → accent */
+@import "./styles.css";
+@import "./ui.css";
+@import "./views.css";
+@import "./accent.css";
