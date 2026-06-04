@@ -123,11 +123,13 @@ image-slot { --is-bg: transparent; }
 .foot-col .eyebrow { margin-bottom: 0.5rem; }
 .foot-col button, .foot-col a, .foot-col span:not(.eyebrow) { font-size: 0.9rem; text-align: left; }
 .foot-col button:hover, .foot-col a:hover { color: #fff; }
-.foot-link { margin-top: 0.4rem; font-weight: 500; color: #fff !important; transition: opacity 0.2s; }
-.foot-link:hover { opacity: 0.7; }
+.foot-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.7rem; align-self: flex-start;
+  background: #fff; color: #0d0d14 !important; font-weight: 600; font-size: 0.9rem;
+  padding: 0.65rem 1.2rem; border-radius: 999px; transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+.foot-link:hover { transform: translateY(-2px); box-shadow: 0 0 22px 2px rgba(255,255,255,0.22); }
 @media (max-width: 768px) {
   .foot-col { gap: 0.3rem; }
-  .foot-col button, .foot-col a { padding: 0.45rem 0; }
+  .foot-col a, .foot-col button:not(.foot-link) { padding: 0.45rem 0; }
 }
 .foot-bottom { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; }
 
