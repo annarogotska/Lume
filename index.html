@@ -27,6 +27,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <script>
@@ -47,17 +48,47 @@
 </script>
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Nuvel",
-  "description": "A design & build studio. Fast, fearless websites and the platforms behind them, shipped in one to two weeks.",
-  "url": "https://nuvel.studio/",
-  "image": "https://nuvel.studio/og.png",
-  "slogan": "Design at the speed of thought",
-  "areaServed": "Worldwide",
-  "knowsAbout": ["Web Design", "Web Development", "Brand Identity", "Design Systems", "E-commerce", "Product Design", "Fintech UI", "Web3 UI"]
-}
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Nuvel",
+    "url": "https://nuvel.studio/",
+    "logo": "https://nuvel.studio/og.png",
+    "description": "A design & build studio shipping fast, SEO-ready websites and platforms in one to two weeks.",
+    "areaServed": "Worldwide",
+    "knowsAbout": ["Web Design", "Web Development", "Brand Identity", "Design Systems", "E-commerce", "Product Design", "Fintech UI", "Web3 UI"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Design & Build Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Design & Development" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Platforms & CRM Design" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand Identity & Design Systems" } }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Nuvel",
+    "url": "https://nuvel.studio/",
+    "description": "A design & build studio. Fast, fearless websites and the platforms behind them, shipped in one to two weeks.",
+    "publisher": { "@type": "Organization", "name": "Nuvel" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Nuvel",
+    "description": "A design & build studio. Fast, fearless websites and the platforms behind them, shipped in one to two weeks.",
+    "url": "https://nuvel.studio/",
+    "image": "https://nuvel.studio/og.png",
+    "slogan": "Design at the speed of thought",
+    "areaServed": "Worldwide",
+    "priceRange": "$$",
+    "serviceType": ["Web Design", "Web Development", "Brand Identity", "Design Systems"]
+  }
+]
 </script>
 </head>
 <body>

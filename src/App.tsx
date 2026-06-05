@@ -15,7 +15,7 @@ import { ServiceDetail } from "./views/ServiceDetail";
 import { Blog, PostDetail } from "./views/Blog";
 import { Process } from "./views/Process";
 import { Contact } from "./views/Contact";
-import { STUDIO, CASES, SERVICES } from "./data";
+import { STUDIO, CASES, SERVICES, FAQ } from "./data";
 import { POSTS } from "./blog";
 import { parseHash, type Go, type Route } from "./router";
 
@@ -39,6 +39,31 @@ function setMeta(attr: "name" | "property", key: string, value: string) {
     document.head.appendChild(el);
   }
   el.setAttribute("content", value);
+}
+
+function setCanonical(href: string) {
+  let el = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!el) {
+    el = document.createElement("link");
+    el.setAttribute("rel", "canonical");
+    document.head.appendChild(el);
+  }
+  el.setAttribute("href", href);
+}
+
+function setJsonLd(id: string, data: object) {
+  let el = document.head.querySelector<HTMLScriptElement>(`script[data-ld="${id}"]`);
+  if (!el) {
+    el = document.createElement("script");
+    el.setAttribute("type", "application/ld+json");
+    el.setAttribute("data-ld", id);
+    document.head.appendChild(el);
+  }
+  el.textContent = JSON.stringify(data);
+}
+
+function removeJsonLd(id: string) {
+  document.head.querySelector(`script[data-ld="${id}"]`)?.remove();
 }
 
 const LOOK = {
@@ -90,37 +115,57 @@ export default function App() {
     );
   }, []);
 
-  // Per-route document title + meta description / Open Graph (basic SEO).
+  // Per-route document title + meta description / Open Graph / canonical / FAQ schema.
   useEffect(() => {
     const base = META[route] ?? META.home;
     let { title, desc } = base;
+
     if (route === "case" && id) {
       const c = CASES.find((x) => x.id === id);
-      if (c) {
-        title = `${c.title} — Nuvel`;
-        desc = c.tldr;
-      }
+      if (c) { title = `${c.title} — Nuvel`; desc = c.tldr; }
     }
     if (route === "service" && id) {
       const s = SERVICES.find((x) => x.key === id);
-      if (s) {
-        title = s.detail.seoTitle;
-        desc = s.detail.seoDesc;
-      }
+      if (s) { title = s.detail.seoTitle; desc = s.detail.seoDesc; }
     }
     if (route === "post" && id) {
       const post = POSTS.find((x) => x.slug === id);
-      if (post) {
-        title = post.seoTitle;
-        desc = post.seoDesc;
-      }
+      if (post) { title = post.seoTitle; desc = post.seoDesc; }
     }
+
     document.title = title;
     setMeta("name", "description", desc);
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", desc);
     setMeta("name", "twitter:title", title);
     setMeta("name", "twitter:description", desc);
+
+    // Canonical: homepage stays clean, other routes use hash URL
+    const canonical = route === "home"
+      ? "https://nuvel.studio/"
+      : `https://nuvel.studio/#${route}${id ? "/" + id : ""}`;
+    setCanonical(canonical);
+
+    // FAQPage schema — inject on process page and service detail pages
+    let faqItems: { q: string; a: string }[] | null = null;
+    if (route === "process") faqItems = FAQ;
+    if (route === "service" && id) {
+      const s = SERVICES.find((x) => x.key === id);
+      if (s?.detail.faq.length) faqItems = s.detail.faq;
+    }
+    if (faqItems) {
+      setJsonLd("faq", {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqItems.map((f) => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a },
+        })),
+      });
+    } else {
+      removeJsonLd("faq");
+    }
   }, [route, id]);
 
   let view;
