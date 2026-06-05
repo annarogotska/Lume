@@ -17,7 +17,7 @@ import { Process } from "./views/Process";
 import { Contact } from "./views/Contact";
 import { STUDIO, CASES, SERVICES, FAQ } from "./data";
 import { POSTS } from "./blog";
-import { parseHash, type Go, type Route } from "./router";
+import { parsePath, type Go, type Route } from "./router";
 
 const META: Record<Route, { title: string; desc: string }> = {
   home: { title: "Nuvel — design & build studio for fast websites & apps", desc: "A design & build studio. Fast, fearless websites — and the platforms behind them — designed, built and shipped in one to two weeks." },
@@ -74,26 +74,28 @@ const LOOK = {
 };
 
 export default function App() {
-  const [{ route, id }, setLoc] = useState(parseHash());
+  const [{ route, id }, setLoc] = useState(parsePath());
   const name = STUDIO.name;
 
-  // hash routing
+  // path routing
   useEffect(() => {
-    const onHash = () => {
-      setLoc(parseHash());
+    const onPop = () => {
+      setLoc(parsePath());
       window.scrollTo({ top: 0, behavior: "auto" });
     };
-    addEventListener("hashchange", onHash);
-    return () => removeEventListener("hashchange", onHash);
+    addEventListener("popstate", onPop);
+    return () => removeEventListener("popstate", onPop);
   }, []);
 
   const go: Go = (r, cid) => {
-    const target = "#" + r + (cid ? "/" + cid : "");
-    if (location.hash === target) {
+    const path = "/" + (r === "home" ? "" : r + (cid ? "/" + cid : ""));
+    if (window.location.pathname === path) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    location.hash = target;
+    history.pushState(null, "", path);
+    setLoc(parsePath());
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   // Case detail pages use a light (white) theme instead of the video background.
@@ -140,10 +142,10 @@ export default function App() {
     setMeta("name", "twitter:title", title);
     setMeta("name", "twitter:description", desc);
 
-    // Canonical: homepage stays clean, other routes use hash URL
+    // Canonical: real path-based URLs — properly indexable by Google
     const canonical = route === "home"
       ? "https://nuvel.studio/"
-      : `https://nuvel.studio/#${route}${id ? "/" + id : ""}`;
+      : `https://nuvel.studio/${route}${id ? "/" + id : ""}`;
     setCanonical(canonical);
 
     // FAQPage schema — inject on process page and service detail pages
