@@ -31,7 +31,7 @@ export function Nav({ route, go, name }: { route: Route; go: Go; name: string })
             {links.map((n) => (
               <button
                 key={n.k}
-                className={"nav-link" + (route === n.k || (route === "case" && n.k === "work") ? " active" : "")}
+                className={"nav-link" + (route === n.k || (route === "case" && n.k === "work") || (route === "service" && n.k === "services") || (route === "post" && n.k === "work") ? " active" : "")}
                 onClick={() => go(n.k)}
               >
                 {n.label}

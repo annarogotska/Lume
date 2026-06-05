@@ -15,9 +15,9 @@ import { ServiceDetail } from "./views/ServiceDetail";
 import { Blog, PostDetail } from "./views/Blog";
 import { Process } from "./views/Process";
 import { Contact } from "./views/Contact";
-import { STUDIO, CASES, SERVICES, FAQ } from "./data";
+import { STUDIO, CASES, SERVICES } from "./data";
 import { POSTS } from "./blog";
-import { parsePath, type Go, type Route } from "./router";
+import { type Go, type Route } from "./router";
 
 const META: Record<Route, { title: string; desc: string }> = {
   home: { title: "Nuvel — design & build studio for fast websites & apps", desc: "A design & build studio. Fast, fearless websites — and the platforms behind them — designed, built and shipped in one to two weeks." },
