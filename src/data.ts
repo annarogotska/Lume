@@ -527,7 +527,7 @@ export const SERVICES: Service[] = [
     lead: "Our core. Marketing sites, storefronts, portfolios and landing pages — designed and built to feel fast, look fearless, and convert.",
     points: [
       "Brand-driven art direction & UI",
-      "Webflow, headless or hand-coded",
+      "Headless, custom or hybrid — no platform lock-in",
       "Motion & interaction design",
       "Performance & SEO baked in",
       "Multilingual from launch",
