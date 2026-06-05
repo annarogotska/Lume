@@ -53,11 +53,15 @@ export function Services({ go }: { go: Go }) {
                 <ul className="svc-points">
                   {s.points.map((p) => (
                     <li key={p}>
-                      {Ic.plus({ style: { width: ".9rem", height: ".9rem", opacity: 0.5 } })}
+                      {Ic.check({ style: { width: ".9rem", height: ".9rem", opacity: 0.6 } })}
                       {p}
                     </li>
                   ))}
                 </ul>
+                <button className="svc-explore" onClick={() => go("service", s.key)}>
+                  Explore {s.title.toLowerCase()}
+                  <span className="svc-explore-arrow">{Ic.arrowUpRight()}</span>
+                </button>
               </div>
             </div>
           ))}

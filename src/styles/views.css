@@ -255,6 +255,129 @@
 .cta-band-sub { max-width: 50ch; }
 .cta-band-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.7rem; }
 
+/* ===================== BLOG ===================== */
+.blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2.2vw, 28px); }
+@media (max-width: 760px) { .blog-grid { grid-template-columns: 1fr; } }
+.blog-card { position: relative; text-align: left; display: flex; flex-direction: column; gap: 0.9rem; padding: clamp(26px, 3vw, 40px); border-radius: 24px; }
+.blog-card-meta { display: flex; align-items: center; gap: 0.5rem; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.blog-dot { opacity: 0.5; }
+.blog-card-title { font-size: clamp(1.3rem, 2.1vw, 1.7rem); line-height: 1.2; letter-spacing: -0.01em; }
+.blog-card-ex { font-size: 0.95rem; line-height: 1.55; flex: 1; }
+.blog-card-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-top: 0.3rem; }
+.blog-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.blog-tag { font-size: 0.7rem; letter-spacing: 0.03em; padding: 0.28rem 0.7rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.7); }
+.blog-card-arrow { flex: 0 0 auto; width: 2.4rem; height: 2.4rem; border-radius: 999px; display: grid; place-items: center; background: rgba(255,255,255,0.06); transition: transform 0.4s var(--ease); }
+.blog-card:hover .blog-card-arrow { transform: rotate(45deg); }
+.blog-card-arrow svg { width: 1.05rem; height: 1.05rem; }
+
+/* post detail — centered editorial hero */
+.post-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: clamp(28px, 5vw, 56px); transition: color 0.25s; }
+.post-back:hover { color: #fff; }
+.post-head { max-width: 88ch; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(1.1rem, 2vw, 1.6rem); }
+.post-tags { justify-content: center; }
+.post-title { font-size: clamp(2.4rem, 6vw, 5rem); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; max-width: 100%; }
+.post-meta { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+/* white article body starts with generous breathing room */
+.post-body-sec { padding-top: clamp(56px, 8vw, 112px); }
+.post-body { max-width: 68ch; margin: 0 auto; }
+.post-body h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); letter-spacing: -0.01em; margin: clamp(2rem, 3.5vw, 2.8rem) 0 0.8rem; }
+.post-body p { font-size: clamp(1.02rem, 1.35vw, 1.18rem); line-height: 1.72; color: rgba(255,255,255,0.82); margin-bottom: 1.1rem; }
+.post-body p:first-child { font-size: clamp(1.15rem, 1.6vw, 1.35rem); color: #fff; line-height: 1.6; }
+
+/* ===================== SERVICE DETAIL ===================== */
+.svc-head-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: clamp(28px, 3.5vw, 44px); }
+/* "Why work with us" — 2×2 cards with an animated icon illustration */
+.svc-why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 2vw, 22px); }
+@media (max-width: 600px) { .svc-why-grid { grid-template-columns: 1fr; } }
+.svc-why-card { border-radius: 22px; padding: clamp(26px, 3vw, 40px); display: flex; flex-direction: column; gap: 0.7rem;
+  transition: transform 0.32s var(--ease), box-shadow 0.32s var(--ease); }
+.svc-why-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px -22px rgba(0,0,0,0.65); }
+.svc-why-ic { width: 2.8rem; height: 2.8rem; margin-bottom: 0.6rem; border-radius: 15px; display: grid; place-items: center; color: #fff;
+  background: linear-gradient(135deg, rgba(201,166,255,0.22), rgba(143,224,200,0.14));
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s; }
+.svc-why-ic svg { width: 1.35rem; height: 1.35rem; }
+.svc-why-card:hover .svc-why-ic { transform: rotate(-8deg) scale(1.1); box-shadow: 0 0 24px -4px rgba(201,166,255,0.55); }
+.svc-why-card h3 { font-size: clamp(1.25rem, 2vw, 1.55rem); letter-spacing: -0.01em; }
+.svc-why-card p { font-size: 0.95rem; line-height: 1.55; }
+
+/* "How we approach" — scroll-stacking cards (each pins, next scrolls over it) */
+.how-stack { display: flex; flex-direction: column; gap: clamp(18px, 3vh, 32px); }
+.how-stack-card {
+  position: sticky; top: calc(110px + var(--i) * 16px);
+  border-radius: 28px; padding: clamp(30px, 4vw, 56px);
+  min-height: clamp(220px, 26vw, 300px);
+  display: grid; grid-template-columns: auto 1fr; gap: clamp(1.4rem, 5vw, 5rem); align-items: center;
+  background: linear-gradient(165deg, #16161f, #0e0e16);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.04) inset, 0 30px 60px -30px rgba(0,0,0,0.8);
+  transform-origin: center top; will-change: transform;
+}
+.how-stack-card::before { content: ""; position: absolute; left: 0; top: clamp(30px, 4vw, 56px); bottom: clamp(30px, 4vw, 56px); width: 3px; border-radius: 3px; background-image: var(--accent-grad); }
+.how-stack-top { display: flex; flex-direction: column; gap: 0.5rem; }
+.how-stack-n { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(3rem, 6vw, 5rem); line-height: 0.9; color: transparent; background-image: var(--accent-grad); -webkit-background-clip: text; background-clip: text; }
+.how-stack-of { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.how-stack-body h3 { font-size: clamp(1.5rem, 2.8vw, 2.3rem); letter-spacing: -0.02em; margin-bottom: 0.7rem; }
+.how-stack-body p { font-size: clamp(0.98rem, 1.3vw, 1.15rem); line-height: 1.6; max-width: 52ch; color: rgba(255,255,255,0.72); }
+@media (max-width: 700px) {
+  .how-stack-card { grid-template-columns: 1fr; gap: 1rem; padding: clamp(24px, 6vw, 34px); top: calc(96px + var(--i) * 12px); }
+  .how-stack-n { font-size: clamp(2.4rem, 14vw, 3.4rem); }
+}
+
+/* "What you get" — master/detail: hover a service, panel shows its detail */
+.get-split { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start;
+  padding: clamp(20px, 3vw, 40px); border-radius: 28px;
+  background: rgba(10,10,17,0.62); -webkit-backdrop-filter: blur(34px) saturate(1.1); backdrop-filter: blur(34px) saturate(1.1);
+  border: 1px solid rgba(255,255,255,0.08); }
+@media (max-width: 820px) { .get-split { grid-template-columns: 1fr; } }
+.get-list { display: flex; flex-direction: column; }
+.get-item { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: 1rem; row-gap: 0.4rem; text-align: left;
+  padding: clamp(15px, 1.8vw, 22px) 0.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.55);
+  transition: color 0.3s, padding-left 0.3s var(--ease); }
+.get-item:last-child { border-bottom: none; }
+.get-item::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 0; border-radius: 4px; background-image: var(--accent-grad); transition: height 0.3s var(--ease); }
+.get-item.on { color: #fff; padding-left: 1rem; }
+.get-item.on::before { height: 58%; }
+.gi-n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; color: rgba(255,255,255,0.3); transition: color 0.3s; }
+.get-item.on .gi-n { color: rgba(255,255,255,0.7); }
+.gi-t { font-size: clamp(1.1rem, 1.9vw, 1.45rem); font-weight: 500; letter-spacing: -0.01em; }
+.gi-arrow { display: inline-flex; opacity: 0; transform: translateX(-6px); transition: opacity 0.3s, transform 0.3s var(--ease); }
+.gi-arrow svg { width: 1.05rem; height: 1.05rem; }
+.get-item.on .gi-arrow { opacity: 0.8; transform: none; }
+.gi-desc { grid-column: 1 / -1; display: none; font-size: 0.92rem; line-height: 1.55; }
+
+.get-detail { position: sticky; top: 110px; border-radius: 24px; padding: clamp(30px, 3.6vw, 50px); min-height: clamp(260px, 30vw, 320px);
+  display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+  background: linear-gradient(165deg, #16161f, #0e0e16); border: 1px solid rgba(255,255,255,0.1); }
+.get-detail-n { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(3rem, 6vw, 5rem); line-height: 0.9; margin-bottom: 1rem; color: transparent; background-image: var(--accent-grad); -webkit-background-clip: text; background-clip: text; }
+.get-detail h3 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: -0.02em; margin-bottom: 0.7rem; }
+.get-detail p { font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.6; color: rgba(255,255,255,0.75); max-width: 46ch; }
+.get-fade { animation: getFade 0.45s var(--ease); }
+@keyframes getFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .get-fade { animation: none; } }
+@media (max-width: 820px) {
+  .get-detail { display: none; }
+  .get-item { cursor: default; }
+  .gi-desc { display: block; }
+  .get-item.on { padding-left: 0.2rem; }
+  .get-item.on::before { height: 0; }
+}
+
+.svc-explore { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.6rem; font-weight: 500; color: #fff; transition: gap 0.25s var(--ease); }
+.svc-explore-arrow { display: inline-flex; transition: transform 0.25s var(--ease); }
+.svc-explore-arrow svg { width: 1rem; height: 1rem; }
+.svc-explore:hover .svc-explore-arrow { transform: translate(3px, -3px); }
+
+.svc-related { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 24px); }
+@media (max-width: 700px) { .svc-related { grid-template-columns: 1fr; } }
+.svc-related-card { position: relative; text-align: left; display: flex; flex-direction: column; gap: 0.5rem; padding: clamp(24px, 3vw, 38px); border-radius: 22px; }
+.svc-related-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.4rem; color: rgba(255,255,255,0.4); }
+.svc-related-card h3 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+.svc-related-card p { font-size: 0.95rem; line-height: 1.55; max-width: 42ch; padding-right: 2rem; }
+.svc-related-arrow { position: absolute; top: clamp(24px, 3vw, 38px); right: clamp(24px, 3vw, 38px); width: 2.2rem; height: 2.2rem; border-radius: 999px; display: grid; place-items: center; background: rgba(255,255,255,0.06); transition: transform 0.4s var(--ease); }
+.svc-related-card:hover .svc-related-arrow { transform: rotate(45deg); }
+.svc-related-arrow svg { width: 1rem; height: 1rem; }
+
 /* Process — inline CTA under the stepper */
 .proc-inline-cta { display: flex; align-items: center; justify-content: space-between; gap: 1.4rem; flex-wrap: wrap; margin-top: clamp(20px, 2.6vw, 32px); }
 .proc-inline-cta .muted { max-width: 44ch; font-size: 0.98rem; }

@@ -202,7 +202,7 @@ export function CaseDetail({ id, go }: { id: string | null; go: Go }) {
             <ul className="case-highlights">
               {c.highlights.map((h) => (
                 <li key={h}>
-                  {Ic.plus({ style: { width: ".85rem", height: ".85rem", opacity: 0.5, flex: "0 0 auto", marginTop: ".28rem" } })}
+                  {Ic.check({ style: { width: ".85rem", height: ".85rem", opacity: 0.6, flex: "0 0 auto", marginTop: ".28rem" } })}
                   {h}
                 </li>
               ))}

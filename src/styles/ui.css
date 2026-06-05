@@ -27,11 +27,11 @@
 
 .nav-cta {
   margin-left: 0.4rem;
-  padding: 0.55rem 1.1rem; border-radius: 999px;
-  font-size: 0.85rem; font-weight: 500; color: #fff;
+  padding: 0.6rem 1.2rem; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 600; background: #fff; color: #000;
   transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
-.nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 16px 2px rgba(255,255,255,0.12); }
+.nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 20px 3px rgba(255,255,255,0.25); }
 .nav-cta:active { transform: scale(0.97); }
 .nav-burger { display: none; width: 2.75rem; height: 2.75rem; border-radius: 999px; align-items: center; justify-content: center; }
 .nav-burger svg { width: 1.2rem; height: 1.2rem; }

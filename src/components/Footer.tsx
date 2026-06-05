@@ -33,6 +33,9 @@ export function Footer({ go, name }: { go: Go; name: string }) {
                   {n.label}
                 </button>
               ))}
+              <button className="muted-8" onClick={() => go("blog")}>
+                Journal
+              </button>
             </nav>
 
             <div className="foot-col">

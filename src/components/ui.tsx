@@ -55,7 +55,7 @@ export function CTA({
 }) {
   const I = Ic[icon] || Ic.arrow;
   return (
-    <button className="btn liquid-glass-strong hover-pop" onClick={onClick} style={{ borderRadius: 999 }}>
+    <button className="btn hover-pop" onClick={onClick} style={{ borderRadius: 999 }}>
       <Fragment>
         <span>{children}</span>
         <span className="icon-circle">{I()}</span>

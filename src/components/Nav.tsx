@@ -18,7 +18,7 @@ export function Nav({ route, go, name }: { route: Route; go: Go; name: string })
   useEffect(() => {
     setOpen(false);
   }, [route]);
-  const links = NAV.filter((n) => n.k !== "home");
+  const links = NAV.filter((n) => n.k !== "home" && n.k !== "contact");
   return (
     <Fragment>
       <header className="nav-bar">
@@ -38,8 +38,11 @@ export function Nav({ route, go, name }: { route: Route; go: Go; name: string })
               </button>
             ))}
           </nav>
-          <button className="nav-cta liquid-glass-strong" onClick={() => go("contact")}>
-            Start a project
+          <button
+            className={"nav-cta" + (route === "contact" ? " active" : "")}
+            onClick={() => go("contact")}
+          >
+            Contact Us
           </button>
           <button className="nav-burger" onClick={() => setOpen(true)} aria-label="Menu">
             {Ic.menu()}

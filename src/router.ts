@@ -1,6 +1,6 @@
 /* NUVEL — tiny hash router (matches the prototype). */
 
-export const ROUTES = ["home", "work", "case", "services", "process", "contact"] as const;
+export const ROUTES = ["home", "work", "case", "services", "service", "process", "blog", "post", "contact"] as const;
 export type Route = (typeof ROUTES)[number];
 
 export interface Location {

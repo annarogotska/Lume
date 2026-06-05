@@ -53,12 +53,29 @@ export interface CaseStudy {
   media: CaseMedia[];
 }
 
+export interface ServiceBit {
+  t: string;
+  d: string;
+}
+
+export interface ServiceDetail {
+  seoTitle: string;
+  seoDesc: string;
+  label: string;
+  intro: string;
+  how: ServiceBit[];
+  deliver: ServiceBit[];
+  why: ServiceBit[];
+  faq: Faq[];
+}
+
 export interface Service {
   key: string;
   n: string;
   title: string;
   lead: string;
   points: string[];
+  detail: ServiceDetail;
 }
 
 export interface ProcessStep {
@@ -516,6 +533,38 @@ export const SERVICES: Service[] = [
       "Multilingual from launch",
       "A CMS your team will actually use",
     ],
+    detail: {
+      seoTitle: "Website design & development — fast custom sites · Nuvel",
+      seoDesc:
+        "Custom website design and development studio — marketing sites, e-commerce storefronts and landing pages, designed and built to convert and ship in one to two weeks.",
+      label: "Website design & development",
+      intro:
+        "Websites are our core craft. We design and build custom marketing websites, e-commerce storefronts, portfolios and high-converting landing pages — fast-loading, SEO-ready and unmistakably yours. No templates, no drawn-out timelines: a launched, beautiful website in one to two weeks.",
+      how: [
+        { t: "Strategy first", d: "We start with your goal, your audience and the one action your website must drive — then design around conversion, not decoration." },
+        { t: "Design in the browser", d: "Real screens, real content, on real devices from day one. You see your actual website taking shape — not a static mockup that breaks on launch." },
+        { t: "Built for speed & SEO", d: "Clean, hand-coded or headless front-end with performance budgets and on-page SEO baked in — so your website ranks and loads fast from the first day live." },
+        { t: "Yours to run", d: "A CMS your team will actually use, documented and handed over. Edit content, add pages and grow your website without calling us back." },
+      ],
+      deliver: [
+        { t: "Marketing & brand sites", d: "Conversion-focused marketing websites with brand-driven art direction and motion." },
+        { t: "E-commerce storefronts", d: "Fast, frictionless online stores — product to checkout — built to sell." },
+        { t: "Landing pages", d: "Campaign and product landing pages designed to turn traffic into action." },
+        { t: "Multilingual & SEO", d: "International, multilingual websites with technical SEO and performance built in." },
+        { t: "CMS & handover", d: "An editable content system, documented, so your team fully owns the website." },
+      ],
+      why: [
+        { t: "Two-week launches", d: "Whole websites designed, built and live in one to two weeks — speed without cutting quality." },
+        { t: "One tight team", d: "The people who design your website also build it — no handoffs, no quality lost in translation." },
+        { t: "Built to convert & rank", d: "Performance, accessibility and SEO are non-negotiable, so your website works as hard as it looks." },
+        { t: "No lock-in", d: "Clean code and an editable CMS, fully handed over — your website is yours to own and extend." },
+      ],
+      faq: [
+        { q: "How long does a website take?", a: "Most custom websites are designed, built and launched in one to two weeks. Larger sites are split into shippable phases so you go live fast and grow from there." },
+        { q: "Do you handle SEO?", a: "Yes — technical and on-page SEO, performance budgets and clean markup are built into every website from the start, not bolted on afterwards." },
+        { q: "Can my team edit the site?", a: "Always. You get a CMS your team will actually use, documented and handed over — no developer needed for everyday content changes." },
+      ],
+    },
   },
   {
     key: "crm",
@@ -529,6 +578,38 @@ export const SERVICES: Service[] = [
       "Design systems & component libraries",
       "Front-end build on your stack",
     ],
+    detail: {
+      seoTitle: "Platform, dashboard & CRM design & build · Nuvel",
+      seoDesc:
+        "Product design and front-end for platforms, dashboards, marketplaces, fintech and Web3 interfaces and custom CRMs — built around how your team and users really work.",
+      label: "Platform, dashboard & CRM design",
+      intro:
+        "When a website isn't enough, we design and build the platform behind it. Custom CRMs, dashboards, marketplaces, client portals and fintech & Web3 product interfaces — complex software made clear, fast and genuinely usable. Product design and front-end engineering in one tight team.",
+      how: [
+        { t: "Map the real workflow", d: "We start from how your team and users actually work — the data, the steps, the edge cases — then design software that fits the workflow, not the other way round." },
+        { t: "Design systems first", d: "A component library and design system up front, so every screen stays consistent and new features ship fast as the platform grows." },
+        { t: "Front-end on your stack", d: "We build the interface on your stack — React, your APIs, your auth — and hand over clean, typed, maintainable code." },
+        { t: "Ship in phases", d: "A usable core first, then iterate. You get something real in users' hands quickly — not a year-long build before anyone sees value." },
+      ],
+      deliver: [
+        { t: "Dashboards & internal tools", d: "Admin panels, pipelines and internal tools that make complex data calm and actionable." },
+        { t: "Marketplaces & portals", d: "Two-sided marketplaces and client portals with clear flows from sign-up to transaction." },
+        { t: "Fintech & Web3 UI", d: "Trustworthy fintech and crypto product interfaces — vesting, KYC, wallets — made legible." },
+        { t: "Custom CRM", d: "CRMs designed around your real sales and ops process, not a rigid off-the-shelf tool." },
+        { t: "Design systems", d: "Scalable design systems and component libraries so the product stays coherent as it grows." },
+      ],
+      why: [
+        { t: "Design + build together", d: "One team designs and front-end-builds your platform — no spec lost in the gap between design and engineering." },
+        { t: "Clarity over complexity", d: "We make complex products feel simple — the hardest and most valuable thing in platform and CRM UI." },
+        { t: "Built to scale", d: "Design systems and clean code mean new modules ship fast without breaking what already works." },
+        { t: "Works with your team", d: "We build on your technology alongside your team — and leave you owning maintainable, typed code." },
+      ],
+      faq: [
+        { q: "Do you build the back-end too?", a: "We focus on product design and front-end. We build on your APIs and stack and work closely with your back-end team or partners — and you own clean, typed code at the end." },
+        { q: "Can you work with our existing product?", a: "Yes — we redesign and extend live platforms, add a design system and ship new modules without forcing a full rebuild." },
+        { q: "Do you handle fintech / Web3 UI?", a: "It's a specialty. We make regulated and crypto flows — KYC, vesting, wallets, on-chain actions — clear and trustworthy without burying users in legalese." },
+      ],
+    },
   },
   {
     key: "brand",
@@ -540,6 +621,37 @@ export const SERVICES: Service[] = [
       "Scalable design systems",
       "Custom animation libraries",
     ],
+    detail: {
+      seoTitle: "Brand identity & design systems studio · Nuvel",
+      seoDesc:
+        "Brand identity, scalable design systems and motion language — the connective tissue that keeps your website, product and brand coherent and distinctive as you grow.",
+      label: "Brand identity & design systems",
+      intro:
+        "The connective tissue behind everything we make. We craft brand identities, scalable design systems and motion languages that keep your website, product and marketing coherent — and unmistakably you — as you grow. Strategy, visuals and systems built to last, not just to look good in a deck.",
+      how: [
+        { t: "Find the signature idea", d: "Every brand we build starts from one clear, ownable idea — the thing that makes you recognisably you, not a trend you'll outgrow in a year." },
+        { t: "Design the system, not just a logo", d: "Type, colour, layout, components and motion — a complete, documented design system, so the brand holds together everywhere it shows up." },
+        { t: "Build it to ship", d: "We deliver brand and design systems as real, usable assets — Figma libraries and code-ready tokens your team and ours can build with immediately." },
+        { t: "Keep it alive", d: "Guidelines and components that flex as you grow, so the brand stays consistent without freezing in time." },
+      ],
+      deliver: [
+        { t: "Visual identity", d: "Logo, type, colour and art direction — a distinctive identity with clear, usable guidelines." },
+        { t: "Design systems", d: "Scalable, documented design systems and component libraries for web and product." },
+        { t: "Motion language", d: "Custom animation and interaction libraries that give the brand a consistent feel in motion." },
+        { t: "Brand guidelines", d: "Practical guidelines your team can actually apply — not a PDF that gathers dust." },
+      ],
+      why: [
+        { t: "Systems, not one-offs", d: "We design brands as systems built to scale, so you're not redesigning everything again in six months." },
+        { t: "Design + build fluency", d: "Because we also build websites and products, our brand systems are made to ship — not just to present." },
+        { t: "Coherent everywhere", d: "One visual language across website, product and marketing — your brand feels intentional at every touchpoint." },
+        { t: "Yours to own", d: "Editable Figma libraries and code-ready design tokens, fully handed over to your team." },
+      ],
+      faq: [
+        { q: "Do you only do brand, or build too?", a: "Both — and that's the point. Our brand identities and design systems are made by a team that also ships websites and products, so they work in the real world, not just on a slide." },
+        { q: "Can you refresh an existing brand?", a: "Yes — we evolve and systematise existing brands, turning a logo and a few colours into a coherent, scalable design system." },
+        { q: "What do we get at the end?", a: "Editable Figma libraries, documented guidelines and code-ready design tokens — everything your team needs to apply the brand yourselves." },
+      ],
+    },
   },
 ];
 

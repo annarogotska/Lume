@@ -99,3 +99,37 @@ html.theme-light .case-view .liquid-glass-strong::before { display: none; }
 /* CTA banner sits on its own dark panel — keep its text light. */
 html.theme-light .case-view .case-cta .eyebrow { color: rgba(255,255,255,0.45); }
 html.theme-light .case-view .case-cta-head { color: #fff; }
+
+/* ---- Blog post: black hero, white article body ---- */
+html.theme-light .post-view { color: #14141c; }
+html.theme-light .post-view .muted { color: rgba(20,20,28,0.62); }
+html.theme-light .post-view h1, html.theme-light .post-view h2, html.theme-light .post-view h3 { color: #0d0d14; }
+html.theme-light .post-view .eyebrow { color: rgba(20,20,28,0.5); }
+html.theme-light .post-view .lede { color: rgba(20,20,28,0.7); }
+html.theme-light .post-view .serif { background: none; -webkit-text-fill-color: initial; color: #0d0d14; filter: none; }
+html.theme-light .post-view .post-body p { color: rgba(20,20,28,0.84); }
+html.theme-light .post-view .post-body p:first-child { color: #0d0d14; }
+
+/* dark hero block */
+html.theme-light .post-hero { background: #0a0a13; }
+html.theme-light .post-view .post-hero .post-title { color: #fff; }
+html.theme-light .post-view .post-hero .post-meta, html.theme-light .post-view .post-hero .post-back { color: rgba(255,255,255,0.6); }
+html.theme-light .post-view .post-hero .post-back:hover { color: #fff; }
+html.theme-light .post-view .post-hero .blog-tag { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.18); }
+
+/* keep-reading cards → light */
+html.theme-light .post-view .blog-card { background: #f4f4f7; border: 1px solid rgba(0,0,0,0.07); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+html.theme-light .post-view .blog-card::before { display: none; }
+html.theme-light .post-view .blog-card-meta { color: rgba(20,20,28,0.5); }
+html.theme-light .post-view .blog-tag { color: rgba(20,20,28,0.7); border-color: rgba(0,0,0,0.12); }
+html.theme-light .post-view .blog-card-arrow { background: rgba(0,0,0,0.05); color: #0d0d14; }
+html.theme-light .post-view .blog-card-arrow svg { color: #0d0d14; }
+
+/* closing CTA → dark island on the white body */
+html.theme-light .post-view .cta-band { background: #0e0e16; border: 1px solid rgba(255,255,255,0.08); -webkit-backdrop-filter: none; backdrop-filter: none; }
+html.theme-light .post-view .cta-band::before { display: none; }
+html.theme-light .post-view .cta-band .eyebrow { color: rgba(255,255,255,0.5); }
+html.theme-light .post-view .cta-band h2, html.theme-light .post-view .cta-band .h-sec { color: #fff; }
+html.theme-light .post-view .cta-band .serif { background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+html.theme-light .post-view .cta-band .muted { color: rgba(255,255,255,0.6); }
+html.theme-light .post-view .cta-band .btn-ghost { color: #fff; background: rgba(255,255,255,0.08); }
