@@ -1,7 +1,16 @@
 Options -MultiViews
 RewriteEngine On
 RewriteBase /
+
+# Serve exact files/directories as-is (assets, images, etc.)
 RewriteRule ^index\.html$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# SSG: serve pre-rendered HTML (e.g. /post/slug → post/slug.html)
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# SPA fallback for any unmatched route
 RewriteRule . /index.html [L]
