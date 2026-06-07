@@ -21,6 +21,23 @@ export interface BlogPost {
 
 export const POSTS: BlogPost[] = [
   {
+    slug: "ai-tools-cut-web-development-time-in-half",
+    title: "How AI Tools Cut Web Development Time in Half",
+    excerpt: "AI coding and design tools are compressing build timelines dramatically. Here's where the time actually goes — and how a fast web design studio turns that into two-week launches.",
+    date: "2026-06-02",
+    read: "5 min",
+    tags: ["AI", "Web development", "Speed"],
+    seoTitle: "How AI Tools Cut Web Development Time in Half · Nuvel",
+    seoDesc: "How AI tools cut web development and design time in half — and how a modern web design studio uses them to ship custom websites in two weeks.",
+    body: [
+      { p: "The promise of AI in web development isn't that it writes your whole site. It's that it removes the slow, repetitive layers — so a custom website that used to take a month now ships in two weeks." },
+      { h: "Where the hours used to go" },
+      { p: "Scaffolding components, wiring forms, writing tests, generating content variants, optimising images, handling translations. None of it required deep creativity — but all of it ate time. AI now does the first 80% of these tasks in minutes." },
+      { h: "What the saved time buys" },
+      { p: "Better strategy, sharper art direction, more iteration on the things that convert. For clients, faster web development means a fast website live sooner — and a team focused on outcomes, not busywork." },
+    ],
+  },
+  {
     slug: "ai-automating-web-design-workflows",
     title: "How AI Is Automating Web Design Workflows (and What It Means for Your Next Website)",
     excerpt:
