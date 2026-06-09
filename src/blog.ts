@@ -21,6 +21,23 @@ export interface BlogPost {
 
 export const POSTS: BlogPost[] = [
   {
+    slug: "web3-fintech-ui-designing-trust",
+    title: "Web3 & Fintech UI: Designing Trust into Complex Products",
+    excerpt: "Fintech and Web3 products live or die on trust. Here's how thoughtful UI design makes complex flows — wallets, KYC, vesting — feel calm, clear and credible.",
+    date: "2026-06-09",
+    read: "6 min",
+    tags: ["Fintech", "Web3", "Product design"],
+    seoTitle: "Web3 & Fintech UI — Designing Trust into Complex Products · Nuvel",
+    seoDesc: "Fintech and Web3 UI design that builds trust — how product design makes complex flows like KYC, wallets and vesting clear, calm and credible.",
+    body: [
+      { p: "In fintech and Web3, design isn't decoration — it's the difference between a product people trust with their money and one they abandon. Complex flows need UI that makes the complicated feel certain." },
+      { h: "Clarity over cleverness" },
+      { p: "Vesting schedules, KYC steps, wallet connections and on-chain actions are intimidating by default. Good product design breaks them into clear, legible steps with honest status and no hidden surprises." },
+      { h: "Trust is a design system" },
+      { p: "Consistent components, predictable patterns and calm visual language signal competence. In fintech and Web3 UI, that consistency is what earns the user's confidence to act." },
+    ],
+  },
+  {
     slug: "ai-tools-cut-web-development-time-in-half",
     title: "How AI Tools Cut Web Development Time in Half",
     excerpt: "AI coding and design tools are compressing build timelines dramatically. Here's where the time actually goes — and how a fast web design studio turns that into two-week launches.",
