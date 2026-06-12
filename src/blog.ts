@@ -21,6 +21,40 @@ export interface BlogPost {
 
 export const POSTS: BlogPost[] = [
   {
+    slug: "psychology-of-color-in-web-design",
+    title: "The Psychology of Color in Web Design",
+    excerpt: "Color shapes how visitors feel and act before they read a word. Here's how to use color psychology in web design to build trust and guide conversion.",
+    date: "2026-06-12",
+    read: "5 min",
+    tags: ["Brand", "Web design", "Psychology"],
+    seoTitle: "The Psychology of Color in Web Design · Nuvel",
+    seoDesc: "How color psychology shapes web design — using color to build brand trust, set mood and guide visitors toward conversion on your website.",
+    body: [
+      { p: "Before a visitor reads your headline, they've already reacted to your colors. Color sets mood, signals brand personality and quietly steers behaviour — which makes it one of the most powerful tools in web design." },
+      { h: "Color as hierarchy" },
+      { p: "A disciplined palette uses one accent to mean 'act here'. When every element is colourful, your call to action disappears. Restraint is what makes color work for conversion." },
+      { h: "Consistency builds trust" },
+      { p: "Color that's used consistently across your website and brand reads as intentional and trustworthy. A documented color system keeps it that way as you grow." },
+    ],
+  },
+  {
+    slug: "motion-design-that-converts",
+    title: "Motion Design That Converts (Not Just Decorates)",
+    excerpt: "Animation can guide attention and lift conversion — or it can just slow your site down. Here's how to use motion design with purpose on a modern website.",
+    date: "2026-06-11",
+    read: "5 min",
+    tags: ["Motion", "UX", "Conversion"],
+    seoTitle: "Motion Design That Converts, Not Just Decorates · Nuvel",
+    seoDesc: "How to use motion design on a website to guide attention and lift conversion — purposeful animation and interaction design that doesn't slow your site.",
+    body: [
+      { p: "Motion is one of the most misused tools in web design. Done well, it directs attention and makes a site feel alive. Done badly, it distracts users and tanks performance." },
+      { h: "Motion with a job" },
+      { p: "Every animation should do something: reveal hierarchy, confirm an action, smooth a transition, or draw the eye to a call to action. Motion for its own sake is just noise that costs load time." },
+      { h: "Performance is part of motion" },
+      { p: "Great motion design is also fast. Hardware-accelerated, restrained, and respectful of reduced-motion settings — so the experience feels premium on every device without hurting your speed." },
+    ],
+  },
+  {
     slug: "web3-fintech-ui-designing-trust",
     title: "Web3 & Fintech UI: Designing Trust into Complex Products",
     excerpt: "Fintech and Web3 products live or die on trust. Here's how thoughtful UI design makes complex flows — wallets, KYC, vesting — feel calm, clear and credible.",
