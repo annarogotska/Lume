@@ -1,15 +1,4 @@
-/* Supabase browser client. Reads public env vars (safe to expose). */
-import { createClient } from "@supabase/supabase-js";
-
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
-
-if (!url || !anonKey) {
-  // Don't crash the whole site if env is missing — the contact form will surface the error.
-  console.warn("Supabase env missing: set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env");
-}
-
-export const supabase = createClient(url ?? "", anonKey ?? "");
+/* Contact form submission via Web3Forms. */
 
 export interface ContactPayload {
   name: string;
@@ -19,10 +8,24 @@ export interface ContactPayload {
   message?: string;
 }
 
-/** Submit the contact form — stores the lead and triggers the notification email
- *  via the `contact` Edge Function. Throws on failure. */
 export async function submitContact(payload: ContactPayload): Promise<void> {
-  const { data, error } = await supabase.functions.invoke("contact", { body: payload });
-  if (error) throw error;
-  if (data && (data as { error?: string }).error) throw new Error((data as { error: string }).error);
+  const res = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      access_key: "ebf50d7f-3ccd-4013-86bb-1046a208dcf4",
+      name: payload.name,
+      email: payload.email,
+      subject: `New brief from ${payload.name} — ${payload.type}`,
+      message: [
+        `Type: ${payload.type}`,
+        payload.budget ? `Budget: ${payload.budget}` : null,
+        payload.message ? `\n${payload.message}` : null,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    }),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.message ?? "Web3Forms error");
 }
