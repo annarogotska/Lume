@@ -58,10 +58,10 @@ export function Services({ go }: { go: Go }) {
                     </li>
                   ))}
                 </ul>
-                <button className="svc-explore" onClick={() => go("service", s.key)}>
+                <a href={`/service/${s.key}`} className="svc-explore" onClick={(e) => { e.preventDefault(); go("service", s.key); }}>
                   Explore {s.title.toLowerCase()}
                   <span className="svc-explore-arrow">{Ic.arrowUpRight()}</span>
-                </button>
+                </a>
               </div>
             </div>
           ))}

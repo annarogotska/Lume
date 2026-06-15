@@ -44,11 +44,12 @@ export function Work({ go }: { go: Go }) {
         <div className="wrap">
           <div className="work-grid">
             {list.map((c, i) => (
-              <button
+              <a
+                href={`/case/${c.id}`}
                 className="work-card liquid-glass hover-pop reveal"
                 data-delay={(i % 2) * 90}
                 key={c.id}
-                onClick={() => go("case", c.id)}
+                onClick={(e) => { e.preventDefault(); go("case", c.id); }}
               >
                 <div className="slot-frame wc-cover">
                   <Media src={c.cover} alt={c.client} />
@@ -66,7 +67,7 @@ export function Work({ go }: { go: Go }) {
                   </div>
                   <span className="wc-arrow liquid-glass">{Ic.arrowUpRight()}</span>
                 </div>
-              </button>
+              </a>
             ))}
           </div>
         </div>

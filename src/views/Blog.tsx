@@ -33,7 +33,7 @@ export function Blog({ go }: { go: Go }) {
         <div className="wrap">
           <div className="blog-grid">
             {posts.map((p) => (
-              <button className="blog-card liquid-glass hover-pop reveal" key={p.slug} onClick={() => go("post", p.slug)}>
+              <a href={`/post/${p.slug}`} className="blog-card liquid-glass hover-pop reveal" key={p.slug} onClick={(e) => { e.preventDefault(); go("post", p.slug); }}>
                 <div className="blog-card-meta">
                   <span>{fmtDate(p.date)}</span>
                   <span className="blog-dot">·</span>
@@ -49,7 +49,7 @@ export function Blog({ go }: { go: Go }) {
                   </div>
                   <span className="blog-card-arrow">{Ic.arrowUpRight()}</span>
                 </div>
-              </button>
+              </a>
             ))}
           </div>
         </div>
