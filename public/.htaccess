@@ -2,6 +2,10 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# 301: strip trailing slash from all paths except root
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
 # Serve exact files/directories as-is (assets, images, etc.)
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} -f [OR]

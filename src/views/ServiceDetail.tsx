@@ -6,6 +6,7 @@ import { Ic } from "../components/icons";
 import { gsap, ScrollTrigger, useGSAP, prefersReducedMotion } from "../anim/gsap";
 import { SERVICES } from "../data";
 import type { Go } from "../router";
+import { routeHref } from "../router";
 
 const WHY_ICONS = ["bolt", "layers", "gauge", "spark"];
 
@@ -53,8 +54,8 @@ export function ServiceDetail({ id, go }: { id: string | null; go: Go }) {
             {d.intro}
           </p>
           <div className="svc-head-cta">
-            <CTA onClick={() => go("contact")}>Start a project</CTA>
-            <Ghost onClick={() => go("work")} icon="arrow">
+            <CTA href={routeHref("contact")} onClick={() => go("contact")}>Start a project</CTA>
+            <Ghost href={routeHref("work")} onClick={() => go("work")} icon="arrow">
               See our work
             </Ghost>
           </div>
@@ -155,9 +156,9 @@ export function ServiceDetail({ id, go }: { id: string | null; go: Go }) {
               <span className="eyebrow">Questions</span>
               <h2 className="h-sec">Good to know.</h2>
               <p className="muted">More about {svc.title.toLowerCase()} — anything else, just ask.</p>
-              <button className="faq-cta" onClick={() => go("contact")}>
+              <a href="/contact" className="faq-cta" onClick={(e) => { e.preventDefault(); go("contact"); }}>
                 Ask us anything <span aria-hidden="true">→</span>
-              </button>
+              </a>
             </div>
             <div className="faq-list">
               {d.faq.map((f) => (
@@ -182,12 +183,12 @@ export function ServiceDetail({ id, go }: { id: string | null; go: Go }) {
           </span>
           <div className="svc-related">
             {others.map((o) => (
-              <button className="svc-related-card liquid-glass hover-pop reveal" key={o.key} onClick={() => go("service", o.key)}>
+              <a href={routeHref("service", o.key)} className="svc-related-card liquid-glass hover-pop reveal" key={o.key} onClick={(e) => { e.preventDefault(); go("service", o.key); }}>
                 <span className="svc-related-n">{o.n}</span>
                 <h3>{o.title}</h3>
                 <p className="muted">{o.lead}</p>
                 <span className="svc-related-arrow">{Ic.arrowUpRight()}</span>
-              </button>
+              </a>
             ))}
           </div>
         </div>
