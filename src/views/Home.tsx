@@ -8,6 +8,7 @@ import { useReveal } from "../components/useReveal";
 import { gsap, useGSAP, prefersReducedMotion } from "../anim/gsap";
 import { CASES, CAPS, WHY, STATS, SERVICES, STUDIO } from "../data";
 import type { Go } from "../router";
+import { routeHref } from "../router";
 
 export function Home({ go }: { go: Go }) {
   const featured = CASES.slice(0, 4);
@@ -53,13 +54,13 @@ export function Home({ go }: { go: Go }) {
         </p>
 
         <div className="hero-cta-center">
-          <button className="hero-btn-primary" onClick={() => go("contact")}>
+          <a href="/contact" className="hero-btn-primary" onClick={(e) => { e.preventDefault(); go("contact"); }}>
             <span className="hero-btn-label">Start a project</span>
             <span className="hero-btn-shine" />
-          </button>
-          <button className="hero-btn-secondary liquid-glass" onClick={() => go("work")}>
+          </a>
+          <a href="/work" className="hero-btn-secondary liquid-glass" onClick={(e) => { e.preventDefault(); go("work"); }}>
             See our work
-          </button>
+          </a>
         </div>
 
         <div className="hero-trust">
@@ -120,18 +121,19 @@ export function Home({ go }: { go: Go }) {
                 Recent <span className="serif">launches</span>
               </h2>
             </div>
-            <button className="btn-ghost liquid-glass hover-pop reveal" data-delay="120" onClick={() => go("work")}>
+            <a href="/work" className="btn-ghost liquid-glass hover-pop reveal" data-delay="120" onClick={(e) => { e.preventDefault(); go("work"); }}>
               All projects {Ic.arrow()}
-            </button>
+            </a>
           </div>
 
           <div className="work-grid">
             {featured.map((c, i) => (
-              <button
+              <a
+                href={routeHref("case", c.id)}
                 className="work-card liquid-glass hover-pop reveal"
                 data-delay={(i % 2) * 90}
                 key={c.id}
-                onClick={() => go("case", c.id)}
+                onClick={(e) => { e.preventDefault(); go("case", c.id); }}
               >
                 <div className="slot-frame wc-cover">
                   <Media src={c.cover} alt={c.client} />
@@ -149,7 +151,7 @@ export function Home({ go }: { go: Go }) {
                   </div>
                   <span className="wc-arrow liquid-glass">{Ic.arrowUpRight()}</span>
                 </div>
-              </button>
+              </a>
             ))}
           </div>
         </div>
@@ -181,24 +183,25 @@ export function Home({ go }: { go: Go }) {
                 we move fast.
               </h2>
             </div>
-            <button className="btn-ghost liquid-glass hover-pop reveal" data-delay="120" onClick={() => go("services")}>
+            <a href="/services" className="btn-ghost liquid-glass hover-pop reveal" data-delay="120" onClick={(e) => { e.preventDefault(); go("services"); }}>
               Explore services {Ic.arrow()}
-            </button>
+            </a>
           </div>
           <div className="svc-teaser">
             {SERVICES.map((s, i) => (
-              <button
+              <a
+                href={routeHref("service", s.key)}
                 className="svc-row liquid-glass hover-pop reveal"
                 data-delay={i * 80}
                 key={s.key}
-                onClick={() => go("services")}
+                onClick={(e) => { e.preventDefault(); go("service", s.key); }}
               >
                 <span className="svc-n">{s.n}</span>
                 <h3>{s.title}</h3>
                 <p className="muted">{s.lead}</p>
                 <ServiceIllo kind={s.key} />
                 <span className="svc-arrow">{Ic.arrowUpRight()}</span>
-              </button>
+              </a>
             ))}
           </div>
         </div>

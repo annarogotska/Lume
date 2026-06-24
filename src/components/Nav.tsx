@@ -4,6 +4,7 @@ import { Ic } from "./icons";
 import { LogoMark } from "./LogoMark";
 import { STUDIO } from "../data";
 import type { Go, Route } from "../router";
+import { routeHref } from "../router";
 
 export const NAV: { k: Route; label: string }[] = [
   { k: "home", label: "Home" },
@@ -23,27 +24,29 @@ export function Nav({ route, go, name }: { route: Route; go: Go; name: string })
     <Fragment>
       <header className="nav-bar">
         <div className="nav-pill liquid-glass">
-          <button className="nav-logo" onClick={() => go("home")} aria-label={name}>
+          <a className="nav-logo" href="/" onClick={(e) => { e.preventDefault(); go("home"); }} aria-label={name}>
             <LogoMark className="logo-bars" />
             <span className="nav-name">{name}</span>
-          </button>
+          </a>
           <nav className="nav-links">
             {links.map((n) => (
-              <button
+              <a
                 key={n.k}
+                href={routeHref(n.k)}
                 className={"nav-link" + (route === n.k || (route === "case" && n.k === "work") || (route === "service" && n.k === "services") || (route === "post" && n.k === "work") ? " active" : "")}
-                onClick={() => go(n.k)}
+                onClick={(e) => { e.preventDefault(); go(n.k); }}
               >
                 {n.label}
-              </button>
+              </a>
             ))}
           </nav>
-          <button
+          <a
+            href="/contact"
             className={"nav-cta" + (route === "contact" ? " active" : "")}
-            onClick={() => go("contact")}
+            onClick={(e) => { e.preventDefault(); go("contact"); }}
           >
             Contact Us
-          </button>
+          </a>
           <button className="nav-burger" onClick={() => setOpen(true)} aria-label="Menu">
             {Ic.menu()}
           </button>
@@ -57,11 +60,11 @@ export function Nav({ route, go, name }: { route: Route; go: Go; name: string })
           </button>
           <div className="mm-links">
             {NAV.map((n, i) => (
-              <button key={n.k} style={{ animationDelay: i * 60 + "ms" }} onClick={() => go(n.k)}>
+              <a key={n.k} href={routeHref(n.k)} style={{ animationDelay: i * 60 + "ms" }} onClick={(e) => { e.preventDefault(); go(n.k); }}>
                 <span className="mm-n">0{i + 1}</span>
                 {n.label}
                 {Ic.arrowUpRight()}
-              </button>
+              </a>
             ))}
           </div>
           <div className="mm-foot muted-2">{STUDIO.tagline}</div>

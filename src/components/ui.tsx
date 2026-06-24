@@ -2,6 +2,7 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import { Ic } from "./icons";
 import type { Go, Route } from "../router";
+import { routeHref } from "../router";
 
 export function CtaBand({
   go,
@@ -30,9 +31,9 @@ export function CtaBand({
           <h2 className="h-sec cta-band-title">{title}</h2>
           {sub && <p className="muted cta-band-sub">{sub}</p>}
           <div className="cta-band-actions">
-            <CTA onClick={() => go(primaryTo)}>{primaryLabel}</CTA>
+            <CTA href={routeHref(primaryTo)} onClick={() => go(primaryTo)}>{primaryLabel}</CTA>
             {secondaryLabel && secondaryTo && (
-              <Ghost onClick={() => go(secondaryTo)} icon="arrow">
+              <Ghost href={routeHref(secondaryTo)} onClick={() => go(secondaryTo)} icon="arrow">
                 {secondaryLabel}
               </Ghost>
             )}
@@ -47,6 +48,7 @@ export function CTA({
   children,
   onClick,
   icon = "arrow",
+  href,
 }: {
   children: ReactNode;
   onClick?: () => void;
@@ -55,12 +57,12 @@ export function CTA({
 }) {
   const I = Ic[icon] || Ic.arrow;
   return (
-    <button className="btn hover-pop" onClick={onClick} style={{ borderRadius: 999 }}>
+    <a href={href} className="btn hover-pop" onClick={href ? (e) => { e.preventDefault(); onClick?.(); } : undefined} style={{ borderRadius: 999 }}>
       <Fragment>
         <span>{children}</span>
         <span className="icon-circle">{I()}</span>
       </Fragment>
-    </button>
+    </a>
   );
 }
 
@@ -68,17 +70,19 @@ export function Ghost({
   children,
   onClick,
   icon,
+  href,
 }: {
   children: ReactNode;
   onClick?: () => void;
   icon?: string;
+  href?: string;
 }) {
   const I = icon ? Ic[icon] || Ic.arrow : null;
   return (
-    <button className="btn-ghost liquid-glass hover-pop" onClick={onClick}>
+    <a href={href} className="btn-ghost liquid-glass hover-pop" onClick={href ? (e) => { e.preventDefault(); onClick?.(); } : undefined}>
       {children}
       {I && I()}
-    </button>
+    </a>
   );
 }
 
