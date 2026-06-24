@@ -35,6 +35,23 @@
   play();
   document.addEventListener("visibilitychange", play);
 })();
+
+/* Stale manifest recovery: vite-react-ssg embeds a hashed manifest filename in HTML.
+   After a deploy the hash changes — a cached HTML referencing the old hash causes
+   JSON.parse("<!DOCTYPE...") to crash. Catch it and force a hard reload once. */
+window.addEventListener("error", function (e) {
+  if (e.message && e.message.indexOf("<!DOCTYPE") !== -1 && !sessionStorage.getItem("_reloaded")) {
+    sessionStorage.setItem("_reloaded", "1");
+    location.reload(true);
+  }
+});
+window.addEventListener("unhandledrejection", function (e) {
+  var msg = e.reason && (e.reason.message || String(e.reason));
+  if (msg && msg.indexOf("<!DOCTYPE") !== -1 && !sessionStorage.getItem("_reloaded")) {
+    sessionStorage.setItem("_reloaded", "1");
+    location.reload(true);
+  }
+});
 </script>
 
 <script type="application/ld+json">

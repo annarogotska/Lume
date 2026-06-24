@@ -2,6 +2,20 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# Cache control
+# HTML files must never be cached: each deploy changes the manifest hash they reference,
+# a stale HTML pointing at a gone manifest hash crashes the app with "<!DOCTYPE is not valid JSON"
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html)$">
+        Header set Cache-Control "no-cache, must-revalidate"
+        Header unset ETag
+    </FilesMatch>
+    # Hashed JS/CSS assets are content-addressed, safe to cache forever
+    <FilesMatch "\.(js|css|woff|woff2|ttf|svg|ico|png|jpg|jpeg|webp|avif)$">
+        Header set Cache-Control "max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
+
 # 301: strip trailing slash from all paths except root
 RewriteCond %{REQUEST_URI} !^/$
 RewriteRule ^(.+)/$ /$1 [R=301,L]
