@@ -15,7 +15,7 @@ export function ThankYou({ go }: { go: Go }) {
   useEffect(() => {
     // Fire Google Ads conversion — replace AW-XXXXXXXXX/LABEL with your conversion action ID
     if (typeof window.gtag === "function") {
-      window.gtag("event", "conversion", { send_to: "AW-XXXXXXXXX/XXXXXXXXXXXXXXXXXXX" });
+      window.gtag("event", "conversion", { send_to: "AW-18268881732/XXXXXXXXXXXXXXXXXXX" });
     }
   }, []);
 
