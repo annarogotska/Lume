@@ -12,6 +12,7 @@ import { ServiceDetail } from "./views/ServiceDetail";
 import { Blog, PostDetail } from "./views/Blog";
 import { Process } from "./views/Process";
 import { Contact } from "./views/Contact";
+import { ThankYou } from "./views/ThankYou";
 import { CASES, SERVICES } from "./data";
 import { POSTS } from "./blog";
 import type { Go } from "./router";
@@ -90,6 +91,11 @@ function ServicePage() {
       <ServiceDetail go={go} id={id ?? null} />
     </>
   );
+}
+
+function ThankYouPage() {
+  const go = useOutletContext<Go>();
+  return <ThankYou go={go} />;
 }
 
 function PostPage() {
@@ -199,6 +205,20 @@ export const routes: RouteRecord[] = [
             title="Start a project — work with the Nuvel design studio"
             desc="Tell us what you're building — a website, a platform or a full product. We reply within one business day."
           />
+        ),
+      },
+      {
+        path: "thank-you",
+        element: (
+          <>
+            <Head>
+              <title>Brief received — Nuvel</title>
+              <meta name="description" content="Your project brief is in. We'll be in touch within one business day." />
+              <link rel="canonical" href={`${BASE}/thank-you`} />
+              <meta name="robots" content="noindex, nofollow" />
+            </Head>
+            <ThankYouPage />
+          </>
         ),
       },
     ],

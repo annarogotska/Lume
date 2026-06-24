@@ -34,7 +34,7 @@ export function Contact({ go }: { go: Go }) {
         budget: form.budget,
         message: form.msg,
       });
-      setSent(true);
+      go("thank-you");
     } catch (err) {
       setError("Something went wrong sending your brief. Please try again, or email us directly.");
       console.error(err);
