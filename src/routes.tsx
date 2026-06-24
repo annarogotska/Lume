@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import type { RouteRecord } from "vite-react-ssg";
 import { Head } from "vite-react-ssg";
+import { globalSchema, breadcrumbSchema, postSchemaGraph, svcSchemaGraph } from "./lib/schema";
 import { Layout } from "./Layout";
 import { Home } from "./views/Home";
 import { Work, CaseDetail } from "./views/Work";
@@ -20,6 +21,13 @@ const BASE = "https://nuvel.studio";
 /* ── thin wrappers: inject go from outlet context, no view changes needed ── */
 function W({ C, title, desc, path }: { C: FC<{ go: Go }>; title: string; desc: string; path: string }) {
   const go = useOutletContext<Go>();
+  const isHome = path === "/";
+  const schema = isHome
+    ? globalSchema
+    : breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: path.slice(1).charAt(0).toUpperCase() + path.slice(2), path },
+      ]);
   return (
     <>
       <Head>
@@ -29,6 +37,7 @@ function W({ C, title, desc, path }: { C: FC<{ go: Go }>; title: string; desc: s
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
         <meta property="og:url" content={`${BASE}${path}`} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       </Head>
       <C go={go} />
     </>
@@ -41,6 +50,11 @@ function CasePage() {
   const c = CASES.find((x) => x.id === id);
   const title = c ? `${c.title} — Nuvel` : "Case study — Nuvel";
   const desc = c?.tldr ?? "A Nuvel case study — the challenge, the approach and the result.";
+  const schema = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Work", path: "/work" },
+    { name: c?.title ?? "Case study", path: `/case/${id ?? ""}` },
+  ]);
   return (
     <>
       <Head>
@@ -49,6 +63,7 @@ function CasePage() {
         <link rel="canonical" href={`${BASE}/case/${id}`} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       </Head>
       <CaseDetail go={go} id={id ?? null} />
     </>
@@ -61,6 +76,7 @@ function ServicePage() {
   const s = SERVICES.find((x) => x.key === id);
   const title = s?.detail.seoTitle ?? "Services — Nuvel";
   const desc = s?.detail.seoDesc ?? "A Nuvel service — designed, built and shipped fast.";
+  const schema = s ? svcSchemaGraph(s) : null;
   return (
     <>
       <Head>
@@ -69,6 +85,7 @@ function ServicePage() {
         <link rel="canonical" href={`${BASE}/service/${id}`} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
+        {schema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />}
       </Head>
       <ServiceDetail go={go} id={id ?? null} />
     </>
@@ -81,6 +98,7 @@ function PostPage() {
   const post = POSTS.find((x) => x.slug === id);
   const title = post?.seoTitle ?? "Journal — Nuvel";
   const desc = post?.seoDesc ?? "An article from Nuvel — a design & build studio.";
+  const schema = post ? postSchemaGraph(post) : null;
   return (
     <>
       <Head>
@@ -89,6 +107,7 @@ function PostPage() {
         <link rel="canonical" href={`${BASE}/post/${id}`} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
+        {schema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />}
       </Head>
       <PostDetail go={go} id={id ?? null} />
     </>
