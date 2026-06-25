@@ -16,6 +16,9 @@ RewriteBase /
     </FilesMatch>
 </IfModule>
 
+# Redirect /thankyou → /thank-you (Google Ads verification uses no-hyphen variant)
+RewriteRule ^thankyou$ /thank-you [R=301,L]
+
 # 301: strip trailing slash from all paths except root
 RewriteCond %{REQUEST_URI} !^/$
 RewriteRule ^(.+)/$ /$1 [R=301,L]
