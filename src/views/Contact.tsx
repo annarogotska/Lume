@@ -89,19 +89,6 @@ export function Contact({ go }: { go: Go }) {
             <p className="lede" style={{ maxWidth: "38ch", marginTop: "1.4rem" }}>
               Tell us what you're making. Fill in the brief and we'll reply within one business day — usually with first ideas already brewing.
             </p>
-            <div className="contact-alt reveal" style={{ marginTop: "2.4rem" }}>
-              <p className="muted" style={{ fontSize: "0.9rem", marginBottom: "0.8rem" }}>
-                Prefer to talk first?
-              </p>
-              <a
-                href={CALENDLY_URL}
-                className="btn-ghost liquid-glass hover-pop"
-                onClick={openCalendly}
-                style={{ display: "inline-flex" }}
-              >
-                Book a 30-min call {Ic.arrow()}
-              </a>
-            </div>
           </div>
 
           <div className="contact-right liquid-glass-strong reveal">
@@ -157,6 +144,48 @@ export function Contact({ go }: { go: Go }) {
                   {error}
                 </p>
               )}
+
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "0.4rem 0" }}>
+                <span style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.1)" }} />
+                <span className="muted" style={{ fontSize: "0.8rem", letterSpacing: "0.06em", textTransform: "uppercase" }}>or</span>
+                <span style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.1)" }} />
+              </div>
+
+              <a
+                href={CALENDLY_URL}
+                onClick={openCalendly}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "1rem",
+                  padding: "1rem 1.4rem",
+                  borderRadius: "0.75rem",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  background: "rgba(255,255,255,0.06)",
+                  cursor: "pointer",
+                  transition: "background 0.18s, border-color 0.18s",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.11)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.32)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.06)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.18)";
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <span style={{ fontSize: "1.2rem", lineHeight: 1 }}>📅</span>
+                  <div>
+                    <div style={{ fontWeight: 500, fontSize: "0.95rem" }}>Book a 30-min call</div>
+                    <div className="muted" style={{ fontSize: "0.8rem", marginTop: "0.15rem" }}>Pick a time that works for you</div>
+                  </div>
+                </div>
+                <span style={{ opacity: 0.5 }}>{Ic.arrow()}</span>
+              </a>
             </form>
           </div>
         </div>
