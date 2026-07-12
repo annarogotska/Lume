@@ -1,5 +1,5 @@
-/* NUVEL — Contact view. Submits via Web3Forms; Calendly popup for call booking. */
-import { useEffect, useState } from "react";
+/* NUVEL — Contact view. Web3Forms submission + Calendly popup + bot protection. */
+import { useEffect, useRef, useState } from "react";
 import { Ic } from "../components/icons";
 import { useReveal } from "../components/useReveal";
 import { submitContact } from "../lib/supabase";
@@ -12,6 +12,8 @@ declare global {
 }
 
 const CALENDLY_URL = "https://calendly.com/contact-nuvel-studio/30min";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const URL_RE = /https?:\/\//i;
 
 interface FormState {
   name: string;
@@ -25,20 +27,20 @@ export function Contact({ go }: { go: Go }) {
   const [form, setForm] = useState<FormState>({ name: "", email: "", type: "Website", budget: "", msg: "" });
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Bot protection: honeypot text value + page load timestamp
+  const [honeypot, setHoneypot] = useState("");
+  const loadedAt = useRef(Date.now());
   useReveal([]);
 
   useEffect(() => {
-    // Load Calendly widget assets only on this page
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://assets.calendly.com/assets/external/widget.css";
     document.head.appendChild(link);
-
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
-
     return () => {
       document.head.removeChild(link);
       document.body.removeChild(script);
@@ -56,6 +58,25 @@ export function Contact({ go }: { go: Go }) {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (sending) return;
+
+    // --- Bot filters (silent — no feedback to bots) ---
+    if (honeypot) return;                                  // honeypot filled
+    if (Date.now() - loadedAt.current < 3000) return;     // submitted in < 3 s
+
+    // --- Human-facing validation ---
+    if (URL_RE.test(form.name)) {
+      setError("Please enter your name.");
+      return;
+    }
+    if (!EMAIL_RE.test(form.email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (form.msg.trim().length < 10) {
+      setError("Please tell us a bit more about your project.");
+      return;
+    }
+
     setSending(true);
     setError(null);
     try {
@@ -68,7 +89,7 @@ export function Contact({ go }: { go: Go }) {
       });
       go("thank-you");
     } catch (err) {
-      setError("Something went wrong sending your brief. Please try again, or email us directly.");
+      setError("Something went wrong. Please try again, or email us directly.");
       console.error(err);
     } finally {
       setSending(false);
@@ -93,6 +114,21 @@ export function Contact({ go }: { go: Go }) {
 
           <div className="contact-right liquid-glass-strong reveal">
             <form onSubmit={submit} className="contact-form">
+
+              {/* Honeypot — hidden from humans, screen readers excluded, bots fill it */}
+              <input
+                type="text"
+                name="website"
+                value={honeypot}
+                onChange={e => setHoneypot(e.target.value)}
+                style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0 }}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+              {/* Web3Forms native bot check */}
+              <input type="checkbox" name="botcheck" style={{ display: "none" }} aria-hidden="true" />
+
               <label className="field">
                 <span>Your name</span>
                 <input value={form.name} onChange={set("name")} placeholder="Jane Doe" autoComplete="name" required />
@@ -140,9 +176,7 @@ export function Contact({ go }: { go: Go }) {
                 <span className="icon-circle">{Ic.arrow()}</span>
               </button>
               {error && (
-                <p className="form-error" role="alert">
-                  {error}
-                </p>
+                <p className="form-error" role="alert">{error}</p>
               )}
 
               <div style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "0.4rem 0" }}>
@@ -155,18 +189,11 @@ export function Contact({ go }: { go: Go }) {
                 href={CALENDLY_URL}
                 onClick={openCalendly}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "1rem",
-                  padding: "1rem 1.4rem",
-                  borderRadius: "0.75rem",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                  background: "rgba(255,255,255,0.06)",
-                  cursor: "pointer",
-                  transition: "background 0.18s, border-color 0.18s",
-                  textDecoration: "none",
-                  color: "inherit",
+                  display: "flex", alignItems: "center", justifyContent: "space-between",
+                  gap: "1rem", padding: "1rem 1.4rem", borderRadius: "0.75rem",
+                  border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.06)",
+                  cursor: "pointer", transition: "background 0.18s, border-color 0.18s",
+                  textDecoration: "none", color: "inherit",
                 }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.11)";
