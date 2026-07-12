@@ -8,7 +8,12 @@ import type { Go } from "../router";
 declare global {
   interface Window {
     Calendly?: { initPopupWidget: (opts: { url: string }) => void };
+    gtag?: (...args: unknown[]) => void;
   }
+}
+
+function track(event: string, params?: Record<string, unknown>) {
+  window.gtag?.("event", event, params);
 }
 
 const CALENDLY_URL = "https://calendly.com/contact-nuvel-studio/30min";
@@ -31,6 +36,11 @@ export function Contact({ go }: { go: Go }) {
   const [honeypot, setHoneypot] = useState("");
   const loadedAt = useRef(Date.now());
   useReveal([]);
+
+  useEffect(() => {
+    // Track form impression — helps measure view→submit gap (large gap = bots or UX issue)
+    track("form_view", { form_id: "contact" });
+  }, []);
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -87,6 +97,8 @@ export function Contact({ go }: { go: Go }) {
         budget: form.budget,
         message: form.msg,
       });
+      // Track successful submit (fires only after Web3Forms confirms success)
+      track("form_submit", { form_id: "contact", project_type: form.type });
       go("thank-you");
     } catch (err) {
       setError("Something went wrong. Please try again, or email us directly.");
