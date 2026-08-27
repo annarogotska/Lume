@@ -11,7 +11,7 @@ export interface Stat {
   k: string;
 }
 
-export type CaseType = "Website" | "Platform";
+export type CaseType = "Website" | "Platform" | "App";
 
 export interface CaseMedia {
   src: string;
@@ -515,6 +515,71 @@ export const CASES: CaseStudy[] = [
       { src: "/assets/cases/PlanetDex4.webp" },
       { src: "/assets/cases/PlanetDex5.webp" },
       { src: "/assets/cases/PlanetDex6.webp" },
+    ],
+  },
+  {
+    id: "hush",
+    client: "Hush",
+    title: "A voice-dictation app that never touches the cloud",
+    type: "App",
+    year: "2026",
+    sector: "Productivity · macOS",
+    role: "Product design, Swift & ML build",
+    duration: "3 days",
+    tool: "Claude Code",
+    stack: ["Swift 5.9/6", "SwiftUI + AppKit", "AVFoundation", "WhisperKit (Core ML)", "Neural Engine", "Carbon EventHotKey API", "NSPasteboard + CGEvent", "async/await + actors"],
+    highlights: [
+      "100% on-device — no cloud, no account",
+      "Global hotkey → record → transcribe → auto-paste",
+      "Toggle and push-to-talk hotkey modes",
+      "6 Whisper models, 12+ languages",
+      "4-step onboarding explains each permission before asking",
+      "Auto-paste falls back to clipboard if Accessibility is denied",
+    ],
+    cover: "/assets/cases/Hush1.webp",
+    tldr: "A native macOS dictation utility — press a key, speak, get text — with every word transcribed on-device and nothing ever sent to a server.",
+    services: ["Product Design", "Native App", "On-device ML"],
+    metrics: [
+      { v: "3 days", k: "Idea → signed build" },
+      { v: "100%", k: "On-device transcription" },
+      { v: "12+", k: "Languages supported" },
+    ],
+    problem: "Every voice-dictation tool on macOS routes audio through someone else's server — an account, a subscription, a round trip to the cloud before a word lands on the page. We wanted the opposite: press a key, speak, and watch the text appear, with nothing ever leaving the machine.",
+    approach: "We built Hush as a native menu-bar utility around WhisperKit running on the Neural Engine — no network calls, no account, no server to trust. A global hotkey drives the whole loop — record, transcribe, auto-paste — with a toggle mode for dictation and a push-to-talk mode for quick notes. Six Whisper model sizes cover twelve-plus languages, so speed versus accuracy stays the user's call, not ours.",
+    result: "A fully on-device dictation app, from the first line of Swift to a signed, working build, in three days — a private, capable alternative to cloud dictation tools that needs no backend at all.",
+    takeaway: "Building something privacy-sensitive? We design and ship the on-device version — no server, no account, nothing to leak — without giving up the polish users expect from a cloud product.",
+    sections: [
+      {
+        label: "The problem",
+        body: "Dictation on macOS almost always means handing your voice to a third party. For anyone writing something private — notes, messages, code comments — that's a real cost for a small convenience. The brief we set ourselves: build the fast, cloud-grade dictation experience people already expect, but keep every byte of audio on the device it was recorded on.",
+        media: "/assets/cases/Hush2.webp",
+      },
+      {
+        label: "Built to disappear",
+        body: "Hush lives in the menu bar and does its real work through a single global hotkey — hold to talk, or toggle to dictate hands-free. There's no window to manage and no workflow to learn: record, speak, release, and the text is already where the cursor was. The interface is the absence of one.",
+        media: "/assets/cases/Hush3.webp",
+      },
+      {
+        label: "On-device, by design",
+        body: "WhisperKit runs entirely on the Neural Engine, so transcription happens locally at speed — no upload, no latency waiting on a server, no data ever leaving the Mac. Six model sizes are bundled, from fast-and-light to large-and-precise, covering twelve-plus languages, so users pick their own trade-off between speed and accuracy.",
+        media: "/assets/cases/Hush4.webp",
+      },
+      {
+        label: "Permissions, explained",
+        body: "Microphone and Accessibility access are non-negotiable for a tool like this, so we built a 4-step onboarding that explains exactly why each permission is needed before macOS asks for it — trust before the prompt, not after. If Accessibility is ever denied, auto-paste degrades gracefully to the clipboard instead of failing silently.",
+        media: "/assets/cases/Hush5.webp",
+      },
+    ],
+    phases: [
+      { label: "Day 1 · Core pipeline", detail: "Global hotkey capture, AVFoundation recording, and WhisperKit transcription wired end-to-end." },
+      { label: "Day 2 · Modes & permissions", detail: "Toggle and push-to-talk modes, the 4-step permission onboarding, and the clipboard fallback." },
+      { label: "Day 3 · Polish & ship", detail: "Model selection, menu-bar UI, codesigning, and the build script." },
+    ],
+    media: [
+      { src: "/assets/cases/Hush2.webp" },
+      { src: "/assets/cases/Hush3.webp" },
+      { src: "/assets/cases/Hush4.webp" },
+      { src: "/assets/cases/Hush5.webp" },
     ],
   },
 ];

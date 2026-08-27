@@ -10,7 +10,7 @@ import type { Go } from "../router";
 export function Work({ go }: { go: Go }) {
   const [filter, setFilter] = useState<"All" | CaseType>("All");
   useReveal([filter]);
-  const types: ("All" | CaseType)[] = ["All", "Website", "Platform"];
+  const types: ("All" | CaseType)[] = ["All", "Website", "Platform", "App"];
   const list = CASES.filter((c) => filter === "All" || c.type === filter);
   return (
     <div className="view view-enter">

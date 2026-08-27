@@ -1,4 +1,6 @@
-/* Contact form submission via Web3Forms. */
+/* Contact form submission via the `contact` Supabase Edge Function.
+   Server-side re-checks honeypot + timestamp, so a request that skips the
+   browser (posted straight to an API) can't skip those checks too. */
 
 export interface ContactPayload {
   name: string;
@@ -6,26 +8,22 @@ export interface ContactPayload {
   type: string;
   budget?: string;
   message?: string;
+  honeypot: string;
+  loadedAt: number;
+  turnstileToken: string;
 }
 
+const FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact`;
+
 export async function submitContact(payload: ContactPayload): Promise<void> {
-  const res = await fetch("https://api.web3forms.com/submit", {
+  const res = await fetch(FUNCTIONS_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({
-      access_key: "ebf50d7f-3ccd-4013-86bb-1046a208dcf4",
-      name: payload.name,
-      email: payload.email,
-      subject: `New brief from ${payload.name} — ${payload.type}`,
-      message: [
-        `Type: ${payload.type}`,
-        payload.budget ? `Budget: ${payload.budget}` : null,
-        payload.message ? `\n${payload.message}` : null,
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+    },
+    body: JSON.stringify(payload),
   });
   const data = await res.json();
-  if (!data.success) throw new Error(data.message ?? "Web3Forms error");
+  if (!res.ok || data.error) throw new Error(data.error ?? "Contact submission failed");
 }

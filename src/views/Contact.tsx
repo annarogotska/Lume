@@ -1,4 +1,4 @@
-/* NUVEL — Contact view. Web3Forms submission + Calendly popup + bot protection. */
+/* NUVEL — Contact view. Supabase Edge Function submission + Calendly popup + bot protection. */
 import { useEffect, useRef, useState } from "react";
 import { Ic } from "../components/icons";
 import { useReveal } from "../components/useReveal";
@@ -17,6 +17,7 @@ function track(event: string, params?: Record<string, unknown>) {
 }
 
 const CALENDLY_URL = "https://calendly.com/contact-nuvel-studio/30min";
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const URL_RE = /https?:\/\//i;
 
@@ -43,6 +44,18 @@ export function Contact({ go }: { go: Go }) {
   }, []);
 
   useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://assets.calendly.com/assets/external/widget.css";
@@ -65,7 +78,7 @@ export function Contact({ go }: { go: Go }) {
   const set = (k: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm({ ...form, [k]: e.target.value });
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (sending) return;
 
@@ -87,6 +100,8 @@ export function Contact({ go }: { go: Go }) {
       return;
     }
 
+    const turnstileToken = (e.currentTarget.elements.namedItem("cf-turnstile-response") as HTMLInputElement | null)?.value ?? "";
+
     setSending(true);
     setError(null);
     try {
@@ -96,6 +111,9 @@ export function Contact({ go }: { go: Go }) {
         type: form.type,
         budget: form.budget,
         message: form.msg,
+        honeypot,
+        loadedAt: loadedAt.current,
+        turnstileToken,
       });
       // Track successful submit (fires only after Web3Forms confirms success)
       track("form_submit", { form_id: "contact", project_type: form.type });
@@ -138,8 +156,8 @@ export function Contact({ go }: { go: Go }) {
                 autoComplete="off"
                 aria-hidden="true"
               />
-              {/* Web3Forms native bot check */}
-              <input type="checkbox" name="botcheck" style={{ display: "none" }} aria-hidden="true" />
+              {/* Cloudflare Turnstile — only renders once VITE_TURNSTILE_SITE_KEY is set */}
+              {TURNSTILE_SITE_KEY && <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />}
 
               <label className="field">
                 <span>Your name</span>
