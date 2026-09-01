@@ -536,7 +536,7 @@ export const CASES: CaseStudy[] = [
       "4-step onboarding explains each permission before asking",
       "Auto-paste falls back to clipboard if Accessibility is denied",
     ],
-    cover: "/assets/cases/Hush1.webp",
+    cover: "/assets/cases/Hush.webp",
     tldr: "A native macOS dictation utility — press a key, speak, get text — with every word transcribed on-device and nothing ever sent to a server.",
     services: ["Product Design", "Native App", "On-device ML"],
     metrics: [
@@ -552,22 +552,22 @@ export const CASES: CaseStudy[] = [
       {
         label: "The problem",
         body: "Dictation on macOS almost always means handing your voice to a third party. For anyone writing something private — notes, messages, code comments — that's a real cost for a small convenience. The brief we set ourselves: build the fast, cloud-grade dictation experience people already expect, but keep every byte of audio on the device it was recorded on.",
-        media: "/assets/cases/Hush2.webp",
+        media: "/assets/cases/Hush.webp",
       },
       {
         label: "Built to disappear",
         body: "Hush lives in the menu bar and does its real work through a single global hotkey — hold to talk, or toggle to dictate hands-free. There's no window to manage and no workflow to learn: record, speak, release, and the text is already where the cursor was. The interface is the absence of one.",
-        media: "/assets/cases/Hush3.webp",
+        media: "/assets/cases/Hush1.webp",
       },
       {
         label: "On-device, by design",
         body: "WhisperKit runs entirely on the Neural Engine, so transcription happens locally at speed — no upload, no latency waiting on a server, no data ever leaving the Mac. Six model sizes are bundled, from fast-and-light to large-and-precise, covering twelve-plus languages, so users pick their own trade-off between speed and accuracy.",
-        media: "/assets/cases/Hush4.webp",
+        media: "/assets/cases/Hush2.webp",
       },
       {
         label: "Permissions, explained",
         body: "Microphone and Accessibility access are non-negotiable for a tool like this, so we built a 4-step onboarding that explains exactly why each permission is needed before macOS asks for it — trust before the prompt, not after. If Accessibility is ever denied, auto-paste degrades gracefully to the clipboard instead of failing silently.",
-        media: "/assets/cases/Hush5.webp",
+        media: "/assets/cases/Hush1.webp",
       },
     ],
     phases: [
@@ -576,10 +576,9 @@ export const CASES: CaseStudy[] = [
       { label: "Day 3 · Polish & ship", detail: "Model selection, menu-bar UI, codesigning, and the build script." },
     ],
     media: [
+      { src: "/assets/cases/Hush.webp" },
+      { src: "/assets/cases/Hush1.webp" },
       { src: "/assets/cases/Hush2.webp" },
-      { src: "/assets/cases/Hush3.webp" },
-      { src: "/assets/cases/Hush4.webp" },
-      { src: "/assets/cases/Hush5.webp" },
     ],
   },
 ];
